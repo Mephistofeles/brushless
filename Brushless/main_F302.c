@@ -93,43 +93,43 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM16_Init();
   MX_USART2_UART_Init();
-  
+
   /* USER CODE BEGIN 2 */
-  /* **************************************************************************** 
-  ==============================================================================   
+  /* ****************************************************************************
+  ==============================================================================
 			###### This function initializes 6-Step lib ######
-  ============================================================================== 
-  **************************************************************************** */     
+  ==============================================================================
+  **************************************************************************** */
   MC_SixStep_INIT();
-  /****************************************************************************/  
+  /****************************************************************************/
   /* USER CODE END 2 */
 
 
   /*! **************************************************************************
-  ==============================================================================   
+  ==============================================================================
 			###### How to use the 6Step FW Example project ######
-  ==============================================================================     
-  This workspace contains the middleware layer with Motor Control library to drive 
+  ==============================================================================
+  This workspace contains the middleware layer with Motor Control library to drive
   a motor connected on X-Nucleo board performing a 6-step control algorithm
-  allowing the motor speed regulation through a potentiometer. The 6-step algorithm 
+  allowing the motor speed regulation through a potentiometer. The 6-step algorithm
   is based on 1shunt current sensing mode and sensorless algorithm for bEmf detection.
-  The workspace is provided for STM32Fxx-Nucleo in four different configurations, 
-  normal, demo, comm mode, boot mode. The "normal" mode waits the blue button event 
-  to start the motor, the "demo" mode starts and stop the motor automatically, the 
-  "comm" mode enables the communication protocol with external PC terminal and the 
+  The workspace is provided for STM32Fxx-Nucleo in four different configurations,
+  normal, demo, comm mode, boot mode. The "normal" mode waits the blue button event
+  to start the motor, the "demo" mode starts and stop the motor automatically, the
+  "comm" mode enables the communication protocol with external PC terminal and the
   "boot" mode enables the FW for external boot loader.
-	
+
    A list of APIs is provided to send command to 6Step lib, for instance:
-	
+
 	(#)  MC_StartMotor() -> Start the motor
-	
+
 	(#)  MC_StoptMotor() -> Stop the motor
-	
+
 	(#)  MC_Set_Speed(...) -> Set the new motor speed
- 
-  The MC_SixStep_param.h contains the full list of MC parameters         
-  ****************************************************************************/    
-  
+
+  The MC_SixStep_param.h contains the full list of MC parameters
+  ****************************************************************************/
+
 	/* Infinite loop */
   while (1)
   {
@@ -178,7 +178,7 @@ void MX_ADC1_Init(void)
 
   ADC_ChannelConfTypeDef sConfig;
 
-	/**Common config 
+	/**Common config
 	*/
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC;
@@ -196,7 +196,7 @@ void MX_ADC1_Init(void)
   hadc1.Init.Overrun = OVR_DATA_OVERWRITTEN;
   HAL_ADC_Init(&hadc1);
 
-	/**Configure Regular Channel 
+	/**Configure Regular Channel
 	*/
   sConfig.Channel = ADC_CHANNEL_12;
   sConfig.Rank = 1;
@@ -214,12 +214,12 @@ void MX_DAC_Init(void)
 
   DAC_ChannelConfTypeDef sConfig;
 
-	/**DAC Initialization 
+	/**DAC Initialization
 	*/
   hdac.Instance = DAC;
   HAL_DAC_Init(&hdac);
 
-	/**DAC channel OUT1 config 
+	/**DAC channel OUT1 config
 	*/
   sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
   sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
@@ -366,9 +366,9 @@ void MX_USART2_UART_Init(void)
 
 }
 
-/** Configure pins as 
-		* Analog 
-		* Input 
+/** Configure pins as
+		* Analog
+		* Input
 		* Output
 		* EVENT_OUT
 		* EXTI
@@ -422,7 +422,7 @@ void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
-	
+
 }
 
 void EXTI0_1_IRQHandler(void)
@@ -456,10 +456,10 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-*/ 
+*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

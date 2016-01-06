@@ -42,48 +42,48 @@
 #include <MC_Common.h>
 #include <stm32f3xx_hal.h>
 
-extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters; /*!< Main SixStep structure*/ 
-extern SIXSTEP_PI_PARAM_InitTypeDef_t PI_parameters; /*!< SixStep PI regulator structure*/ 
+extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters; /*!< Main SixStep structure*/
+extern SIXSTEP_PI_PARAM_InitTypeDef_t PI_parameters; /*!< SixStep PI regulator structure*/
 extern L6230_MotorDriver_TypeDef L6230MotorDriver;
 extern void MC_ADCx_SixStep_Bemf(void);
 extern void MC_TIMx_SixStep_timebase(void);
 extern void MC_SysTick_SixStep_MediumFrequencyTask(void);
-  
-  
-/** @addtogroup MIDDLEWARES     MIDDLEWARES 
+
+
+/** @addtogroup MIDDLEWARES     MIDDLEWARES
   * @brief  Middlewares Layer
-  * @{ 
+  * @{
   */
 
 
 /** @addtogroup MC_6-STEP_LIB    MC_6-STEP_LIB
   * @brief  Motor Control driver
-  * @{ 
+  * @{
   */
 
 /** @addtogroup stm32F302_nucleo_ihm07m1    stm32F302_nucleo_ihm07m1
   * @brief  Interface file for STM32F302 and Motor Control Library configuration
-  * @{ 
+  * @{
   */
 
 /** @defgroup MC_SixStep_ADC_Channel    MC_SixStep_ADC_Channel
   *  @{
-	* @brief Select the new ADC Channel 
+	* @brief Select the new ADC Channel
 */
 void MC_SixStep_ADC_Channel(uint32_t adc_ch)
 {
-	ADCx.Instance->CR |= ADC_CR_ADSTP;  
+	ADCx.Instance->CR |= ADC_CR_ADSTP;
 	while (ADCx.Instance->CR & ADC_CR_ADSTP)
-		;   
+		;
 	/* Clear the old SQx bits for the selected rank */
 	ADCx.Instance->SQR1 &= ~__HAL_ADC_SQR1_RK(ADC_SQR2_SQ5, 1);
 	/* Set the SQx bits for the selected rank */
 	ADCx.Instance->SQR1 |= __HAL_ADC_SQR1_RK(adc_ch, 1);
-	ADCx.Instance->CR |= ADC_CR_ADSTART;  
+	ADCx.Instance->CR |= ADC_CR_ADSTART;
 }
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup MC_SixStep_Nucleo_Init    MC_SixStep_Nucleo_Init
@@ -95,9 +95,9 @@ void MC_SixStep_Nucleo_Init()
 {
 	TIM_ClearInputConfigTypeDef sClearInputConfig;
 	ADC_ChannelConfTypeDef sConfig;
-	
+
 	/******************** ETR CONFIGURATION ************************************/
-	sClearInputConfig.ClearInputState = 1;  
+	sClearInputConfig.ClearInputState = 1;
 	sClearInputConfig.ClearInputSource = TIM_CLEARINPUTSOURCE_ETR;
 	sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
 	sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
@@ -106,11 +106,11 @@ void MC_SixStep_Nucleo_Init()
 	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH2);
 	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH3);
 	/***************************************************************************/
-	
+
 	__HAL_FREEZE_TIM1_DBGMCU();  /* Stop TIM during Breakpoint*/
-	
+
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_BREAK); /* Enable the TIM Break interrupt */
-	
+
 	/******************** REGULAR CHANNELS CONFIGURATION *************************/
 	sConfig.Channel = ADC_CH_1; /* Current feedabck */
 	sConfig.Rank = 1;
@@ -136,12 +136,12 @@ void MC_SixStep_Nucleo_Init()
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_CH_2; /* Potentiometer */
 	sConfig.SamplingTime = ADC_CH_2_ST;
-	HAL_ADC_ConfigChannel(&hadc1, &sConfig);    
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	/***************************************************************************/
 }
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup START_Ref_Generation    START_Ref_Generation
@@ -151,10 +151,10 @@ void MC_SixStep_Nucleo_Init()
 void START_Ref_Generation()
 {
 	REFx.Instance->CCR1 = 0;
-	HAL_TIM_PWM_Start(&REFx, HF_TIMx_CH1);   
-} 
+	HAL_TIM_PWM_Start(&REFx, HF_TIMx_CH1);
+}
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup STOP_Ref_Generation    STOP_Ref_Generation
@@ -164,10 +164,10 @@ void START_Ref_Generation()
 void STOP_Ref_Generation()
 {
 	REFx.Instance->CCR1 = 0;
-	HAL_TIM_PWM_Stop(&REFx, HF_TIMx_CH1);    
+	HAL_TIM_PWM_Stop(&REFx, HF_TIMx_CH1);
 }
 /**
-  * @} 
+  * @}
   */
 /** @defgroup Set_Ref_Generation    Set_Ref_Generation
   *  @{
@@ -178,31 +178,31 @@ void Set_Ref_Generation(uint16_t Iref)
 	REFx.Instance->CCR1 = (uint32_t)(Iref * REFx.Instance->ARR) / 4096;
 }
 /**
-  * @} 
+  * @}
   */
-  
+
 /** @defgroup START_DAC    START_DAC
   *  @{
 	 @brief Start DAC for debug
 */
 void START_DAC()
 {
-	HAL_DAC_Start(&DACx, DACx_CH); 
-} 
+	HAL_DAC_Start(&DACx, DACx_CH);
+}
 /**
-  * @} 
-  */  
+  * @}
+  */
 /** @defgroup STOP_DAC    STOP_DAC
   *  @{
 	 @brief Stop DAC for debug
 */
 void STOP_DAC()
 {
-	HAL_DAC_Stop(&DACx, DACx_CH); 
+	HAL_DAC_Stop(&DACx, DACx_CH);
 }
 /**
-  * @} 
-  */    
+  * @}
+  */
 /** @defgroup SET_DAC_value    SET_DAC_value
   *  @{
 	 @brief Set DAC value for debug
@@ -212,57 +212,57 @@ void SET_DAC_value(uint16_t dac_value)
 	HAL_DAC_SetValue(&DACx, DACx_CH, DACx_ALIGN, dac_value);
 }
 /**
-  * @} 
-  */   
+  * @}
+  */
 
 /** @defgroup HAL_ADC_ConvCpltCallback    HAL_ADC_ConvCpltCallback
   *  @{
-	* @brief ADC callback 
+	* @brief ADC callback
 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
 	MC_ADCx_SixStep_Bemf();
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup HAL_TIM_PeriodElapsedCallback    HAL_TIM_PeriodElapsedCallback
   *  @{
-	* @brief htim callback 
+	* @brief htim callback
 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	MC_TIMx_SixStep_timebase();
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup HAL_SYSTICK_Callback    HAL_SYSTICK_Callback
   *  @{
-	* @brief Systick callback 
+	* @brief Systick callback
 */
 void HAL_SYSTICK_Callback()
 {
 	MC_SysTick_SixStep_MediumFrequencyTask();
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup HAL_GPIO_EXTI_Callback    HAL_GPIO_EXTI_Callback
   *  @{
-	* @brief EXT callback 
-*/ 
+	* @brief EXT callback
+*/
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	MC_EXT_button_SixStep();
 }
 /**
-  * @} 
+  * @}
   */
-  
+
 /** @defgroup EnableInput_CH1_E_CH2_E_CH3_D    EnableInput_CH1_E_CH2_E_CH3_D
   *  @{
 	* @brief Enable Input channel for L6230
@@ -274,9 +274,9 @@ void MC_SixStep_EnableInput_CH1_E_CH2_E_CH3_D()
 }
 
 /**
-  * @} 
-  */  
-  
+  * @}
+  */
+
  /** @defgroup EnableInput_CH1_E_CH2_D_CH3_E    EnableInput_CH1_E_CH2_D_CH3_E
   *  @{
 	* @brief Enable Input channel for L6230
@@ -287,8 +287,8 @@ void  MC_SixStep_EnableInput_CH1_E_CH2_D_CH3_E()
 }
 
 /**
-  * @} 
-  */ 
+  * @}
+  */
 
 /** @defgroup EnableInput_CH1_D_CH2_E_CH3_E    EnableInput_CH1_D_CH2_E_CH3_E
   *  @{
@@ -300,7 +300,7 @@ void MC_SixStep_EnableInput_CH1_D_CH2_E_CH3_E()
 }
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup DisableInput_CH1_D_CH2_D_CH3_D    DisableInput_CH1_D_CH2_D_CH3_D
@@ -314,7 +314,7 @@ void MC_SixStep_DisableInput_CH1_D_CH2_D_CH3_D()
 }
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup Start_PWM_driving    Start_PWM_driving
@@ -325,10 +325,10 @@ void MC_SixStep_DisableInput_CH1_D_CH2_D_CH3_D()
 void MC_SixStep_Start_PWM_driving()
 {
 	L6230MotorDriver.Start_PWM_driving();
-} 
+}
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup Stop_PWM_driving    Stop_PWM_driving
@@ -339,7 +339,7 @@ void MC_SixStep_Start_PWM_driving()
 void MC_SixStep_Stop_PWM_driving()
 {
 	L6230MotorDriver.Stop_PWM_driving();
-}  
+}
 
 /**
   * @}
@@ -347,45 +347,45 @@ void MC_SixStep_Stop_PWM_driving()
 
 /** @defgroup HF_TIMx_SetDutyCycle_CH1    HF_TIMx_SetDutyCycle_CH1
   *  @{
-	* @brief Set the Duty Cycle value for CH1 
+	* @brief Set the Duty Cycle value for CH1
 */
 
 void MC_SixStep_HF_TIMx_SetDutyCycle_CH1(uint16_t CCR_value)
-{ 
+{
 	L6230MotorDriver.HF_TIMx_SetDutyCycle_CH1(CCR_value);
 }
 
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup HF_TIMx_SetDutyCycle_CH2    HF_TIMx_SetDutyCycle_CH2
   *  @{
-	* @brief Set the Duty Cycle value for CH2 
+	* @brief Set the Duty Cycle value for CH2
 */
 
 void MC_SixStep_HF_TIMx_SetDutyCycle_CH2(uint16_t CCR_value)
-{ 
+{
 	L6230MotorDriver.HF_TIMx_SetDutyCycle_CH2(CCR_value);
 }
 /**
-  * @} 
+  * @}
   */
 
 
 /** @defgroup HF_TIMx_SetDutyCycle_CH3    HF_TIMx_SetDutyCycle_CH3
   *  @{
-	* @brief Set the Duty Cycle value for CH3 
+	* @brief Set the Duty Cycle value for CH3
 */
 
 void MC_SixStep_HF_TIMx_SetDutyCycle_CH3(uint16_t CCR_value)
-{ 
+{
 	L6230MotorDriver.HF_TIMx_SetDutyCycle_CH3(CCR_value);
 }
 
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup Current_Reference_Start    Current_Reference_Start
@@ -399,7 +399,7 @@ void MC_SixStep_Current_Reference_Start()
 }
 
 /**
-  * @} 
+  * @}
   */
 
 
@@ -414,7 +414,7 @@ void MC_SixStep_Current_Reference_Stop()
 }
 
 /**
-  * @}  
+  * @}
   */
 
 
@@ -429,7 +429,7 @@ void MC_SixStep_Current_Reference_Setvalue(uint16_t Iref)
 }
 
 /**
-  * @}  
+  * @}
   */
 
 
@@ -440,130 +440,130 @@ void MC_SixStep_Current_Reference_Setvalue(uint16_t Iref)
 */
 
 void Bemf_delay_calc()
-{ 
+{
 	if (PI_parameters.Reference >= 0)
-	{  
+	{
 		if (SIXSTEP_parameters.speed_fdbk_filtered <= 12000 && SIXSTEP_parameters.speed_fdbk_filtered > 10000)
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_1;    
-		}  
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_1;
+		}
 		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 10000 && SIXSTEP_parameters.speed_fdbk_filtered > 7800)
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_2; 
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_2;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 7800 && SIXSTEP_parameters.speed_fdbk_filtered > 6400) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_3;    
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 7800 && SIXSTEP_parameters.speed_fdbk_filtered > 6400)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_3;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 6400 && SIXSTEP_parameters.speed_fdbk_filtered > 5400)  
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_4;      
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 6400 && SIXSTEP_parameters.speed_fdbk_filtered > 5400)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_4;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 5400 && SIXSTEP_parameters.speed_fdbk_filtered > 4650) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_5;      
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 4650 && SIXSTEP_parameters.speed_fdbk_filtered > 4100) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_6;      
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 4100 && SIXSTEP_parameters.speed_fdbk_filtered > 3650) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_7;      
-		}     
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 3650 && SIXSTEP_parameters.speed_fdbk_filtered > 3300) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_8;      
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 5400 && SIXSTEP_parameters.speed_fdbk_filtered > 4650)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_5;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 3300 && SIXSTEP_parameters.speed_fdbk_filtered > 2600) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_9;    
-		} 
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 2600 && SIXSTEP_parameters.speed_fdbk_filtered > 1800) 
-		{ 
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 4650 && SIXSTEP_parameters.speed_fdbk_filtered > 4100)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_6;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 4100 && SIXSTEP_parameters.speed_fdbk_filtered > 3650)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_7;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 3650 && SIXSTEP_parameters.speed_fdbk_filtered > 3300)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_8;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 3300 && SIXSTEP_parameters.speed_fdbk_filtered > 2600)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_9;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 2600 && SIXSTEP_parameters.speed_fdbk_filtered > 1800)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_10;
-		} 
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1800 && SIXSTEP_parameters.speed_fdbk_filtered > 1500) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1800 && SIXSTEP_parameters.speed_fdbk_filtered > 1500)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_11;
-		} 
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1500 && SIXSTEP_parameters.speed_fdbk_filtered > 1300) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1500 && SIXSTEP_parameters.speed_fdbk_filtered > 1300)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_12;
-		}    
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1300 && SIXSTEP_parameters.speed_fdbk_filtered > 1000) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1300 && SIXSTEP_parameters.speed_fdbk_filtered > 1000)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_13;
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1000 && SIXSTEP_parameters.speed_fdbk_filtered > 500) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered <= 1000 && SIXSTEP_parameters.speed_fdbk_filtered > 500)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_14;
-		}  
+		}
 	}
-	else 
+	else
 	{
 		if (SIXSTEP_parameters.speed_fdbk_filtered >= -12000 && SIXSTEP_parameters.speed_fdbk_filtered < -10000)
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_1;    
-		}  
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_1;
+		}
 		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -10000 && SIXSTEP_parameters.speed_fdbk_filtered < -7800)
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_2; 
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_2;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -7800 && SIXSTEP_parameters.speed_fdbk_filtered < -6400) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_3;    
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -7800 && SIXSTEP_parameters.speed_fdbk_filtered < -6400)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_3;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -6400 && SIXSTEP_parameters.speed_fdbk_filtered < -5400)  
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_4;      
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -6400 && SIXSTEP_parameters.speed_fdbk_filtered < -5400)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_4;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -5400 && SIXSTEP_parameters.speed_fdbk_filtered < -4650) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_5;      
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -4650 && SIXSTEP_parameters.speed_fdbk_filtered < -4100) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_6;      
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -4100 && SIXSTEP_parameters.speed_fdbk_filtered < -3650) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_7;      
-		}     
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -3650 && SIXSTEP_parameters.speed_fdbk_filtered < -3300) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_8;      
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -5400 && SIXSTEP_parameters.speed_fdbk_filtered < -4650)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_5;
 		}
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -3300 && SIXSTEP_parameters.speed_fdbk_filtered < -2650) 
-		{ 
-			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_9;     
-		} 
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -2600 && SIXSTEP_parameters.speed_fdbk_filtered < -1800) 
-		{ 
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -4650 && SIXSTEP_parameters.speed_fdbk_filtered < -4100)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_6;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -4100 && SIXSTEP_parameters.speed_fdbk_filtered < -3650)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_7;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -3650 && SIXSTEP_parameters.speed_fdbk_filtered < -3300)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_8;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -3300 && SIXSTEP_parameters.speed_fdbk_filtered < -2650)
+		{
+			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_9;
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -2600 && SIXSTEP_parameters.speed_fdbk_filtered < -1800)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_10;
-		} 
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1800 && SIXSTEP_parameters.speed_fdbk_filtered < -1500) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1800 && SIXSTEP_parameters.speed_fdbk_filtered < -1500)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_11;
-		}   
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1500 && SIXSTEP_parameters.speed_fdbk_filtered < -1300) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1500 && SIXSTEP_parameters.speed_fdbk_filtered < -1300)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_12;
-		}   
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1300 && SIXSTEP_parameters.speed_fdbk_filtered < -1000) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1300 && SIXSTEP_parameters.speed_fdbk_filtered < -1000)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_13;
-		}  
-		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1000 && SIXSTEP_parameters.speed_fdbk_filtered < -500) 
-		{ 
+		}
+		else if (SIXSTEP_parameters.speed_fdbk_filtered >= -1000 && SIXSTEP_parameters.speed_fdbk_filtered < -500)
+		{
 			SIXSTEP_parameters.demagn_value = DEMAGN_VAL_14;
-		} 
-  
+		}
+
 	}
 }
 
 /**
-  * @}  
+  * @}
   */
 
 /** @defgroup Get_UART_data   Get_UART_data
@@ -575,17 +575,17 @@ uint32_t Get_UART_Data()
 	return (UART.Instance->RDR);
 }
 /**
- * @}  
- */ 
+ * @}
+ */
 
 /**
   * @} // end STM32F302_Interface
   */
 
 /**
-  * @}  end MC_6-STEP_LIB 
+  * @}  end MC_6-STEP_LIB
   */
-	
+
 /**
   * @} // end MIDDLEWARES
   */

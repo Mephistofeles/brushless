@@ -38,10 +38,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "UART_UI.h"
 
-#ifdef UART_COMM  
+#ifdef UART_COMM
 
-extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters;      /*!< Main SixStep structure*/ 
-extern SIXSTEP_PI_PARAM_InitTypeDef_t PI_parameters;     /*!< SixStep PI regulator structure*/ 
+extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters;      /*!< Main SixStep structure*/
+extern SIXSTEP_PI_PARAM_InitTypeDef_t PI_parameters;     /*!< SixStep PI regulator structure*/
 extern uint8_t Enable_start_button;
 extern void CMD_Parser(char* pCommandString);
 extern void MC_Set_PI_param(SIXSTEP_PI_PARAM_InitTypeDef_t *);
@@ -49,18 +49,18 @@ extern void MC_Set_PI_param(SIXSTEP_PI_PARAM_InitTypeDef_t *);
 static uint16_t Uart_cmd_flag = 0;
 const CMD_T CmdTable[] = {
   {"STARTM", CMD_STARTM},
-  {"STOPMT", CMD_STOPMT}, 
-  {"DIRECT", CMD_DIRECTION},   
-  {"SETSPD", CMD_SETSPD}, 
-  {"STATUS", CMD_STATUS},     
-  {"GETSPD", CMD_GETSPD},    
-  {"POTENZ", CMD_POTENZ}, 
-  {"INIREF", CMD_INIREF},   
-  {"POLESP", CMD_POLESP}, 
-  {"ACCELE", CMD_ACCELE},   
-  {"KP-PRM", CMD_KP_PRM},  
-  {"KI-PRM", CMD_KI_PRM},    
-  {"HELP", CMD_HELP},   
+  {"STOPMT", CMD_STOPMT},
+  {"DIRECT", CMD_DIRECTION},
+  {"SETSPD", CMD_SETSPD},
+  {"STATUS", CMD_STATUS},
+  {"GETSPD", CMD_GETSPD},
+  {"POTENZ", CMD_POTENZ},
+  {"INIREF", CMD_INIREF},
+  {"POLESP", CMD_POLESP},
+  {"ACCELE", CMD_ACCELE},
+  {"KP-PRM", CMD_KP_PRM},
+  {"KI-PRM", CMD_KI_PRM},
+  {"HELP", CMD_HELP},
   {"", NULL}
 };
 
@@ -97,15 +97,15 @@ extern uint8_t UART_FLAG_RECEIVE;
 extern uint8_t UART_FLAG_POTENZ;
 
 
-/** @addtogroup MIDDLEWARES     MIDDLEWARES 
+/** @addtogroup MIDDLEWARES     MIDDLEWARES
   * @brief  Middlewares Layer
-  * @{ 
+  * @{
   */
 
 
 /** @addtogroup UART_UI  UART_UI
   * @brief  Serial communication through PC serial terminal
-  * @{ 
+  * @{
   */
 
 
@@ -114,13 +114,13 @@ extern uint8_t UART_FLAG_POTENZ;
     * @brief UART start receive function
 */
 void UART_Communication_Task()
-{ 
- if(HAL_UART_Receive_IT(&huart2, (uint8_t *)aRxBuffer, 10) != HAL_OK) 
+{
+ if(HAL_UART_Receive_IT(&huart2, (uint8_t *)aRxBuffer, 10) != HAL_OK)
   {   huart2.State = HAL_UART_STATE_READY; }
  else UART_FLAG_RECEIVE = FALSE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup MC_UI_INIT    MC_UI_INIT
@@ -132,88 +132,88 @@ void UART_Communication_Task()
    HAL_UART_Transmit(&huart2, (uint8_t *)row0TxBuffer, (COUNTOF(row0TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    } 
+    }
    HAL_UART_Transmit(&huart2, (uint8_t *)row1TxBuffer, (COUNTOF(row1TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    } 
-   HAL_UART_Transmit(&huart2, (uint8_t *)row2TxBuffer, (COUNTOF(row2TxBuffer) - 1),5000);   
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row2TxBuffer, (COUNTOF(row2TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }    
+    }
    HAL_UART_Transmit(&huart2, (uint8_t *)row3TxBuffer, (COUNTOF(row3TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }   
-   HAL_UART_Transmit(&huart2, (uint8_t *)row4TxBuffer, (COUNTOF(row4TxBuffer) - 1),5000);    
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }     
-   HAL_UART_Transmit(&huart2, (uint8_t *)row5TxBuffer, (COUNTOF(row5TxBuffer) - 1),5000);   
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }   
-   HAL_UART_Transmit(&huart2, (uint8_t *)row6TxBuffer, (COUNTOF(row6TxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    } 
-   HAL_UART_Transmit(&huart2, (uint8_t *)row7aTxBuffer, (COUNTOF(row7aTxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }   
-   HAL_UART_Transmit(&huart2, (uint8_t *)row7TxBuffer, (COUNTOF(row7TxBuffer) - 1),5000);     
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row4TxBuffer, (COUNTOF(row4TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
     }
-   HAL_UART_Transmit(&huart2, (uint8_t *)row7bTxBuffer, (COUNTOF(row7bTxBuffer) - 1),5000);     
+   HAL_UART_Transmit(&huart2, (uint8_t *)row5TxBuffer, (COUNTOF(row5TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }  
-   HAL_UART_Transmit(&huart2, (uint8_t *)row7cTxBuffer, (COUNTOF(row7cTxBuffer) - 1),5000);     
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row6TxBuffer, (COUNTOF(row6TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }     
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row7aTxBuffer, (COUNTOF(row7aTxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row7TxBuffer, (COUNTOF(row7TxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row7bTxBuffer, (COUNTOF(row7bTxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row7cTxBuffer, (COUNTOF(row7cTxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
    HAL_UART_Transmit(&huart2, (uint8_t *)row71TxBuffer, (COUNTOF(row71TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    } 
+    }
    HAL_UART_Transmit(&huart2, (uint8_t *)row71bTxBuffer, (COUNTOF(row71bTxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }  
-   HAL_UART_Transmit(&huart2, (uint8_t *)row8TxBuffer, (COUNTOF(row8TxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }     
-   HAL_UART_Transmit(&huart2, (uint8_t *)row9TxBuffer, (COUNTOF(row9TxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }       
-   HAL_UART_Transmit(&huart2, (uint8_t *)row10TxBuffer, (COUNTOF(row10TxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }       
-   HAL_UART_Transmit(&huart2, (uint8_t *)row11TxBuffer, (COUNTOF(row11TxBuffer) - 1),5000);     
-   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
-    {
-    }      
-   HAL_UART_Transmit(&huart2, (uint8_t *)row14TxBuffer, (COUNTOF(row14TxBuffer) - 1),5000);     
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row8TxBuffer, (COUNTOF(row8TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
     }
-   HAL_UART_Transmit(&huart2, (uint8_t *)row15TxBuffer, (COUNTOF(row15TxBuffer) - 1),5000);     
+   HAL_UART_Transmit(&huart2, (uint8_t *)row9TxBuffer, (COUNTOF(row9TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }   
-   HAL_UART_Transmit(&huart2, (uint8_t *)row16TxBuffer, (COUNTOF(row16TxBuffer) - 1),5000);     
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row10TxBuffer, (COUNTOF(row10TxBuffer) - 1),5000);
    while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
     {
-    }  
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row11TxBuffer, (COUNTOF(row11TxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row14TxBuffer, (COUNTOF(row14TxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row15TxBuffer, (COUNTOF(row15TxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
+   HAL_UART_Transmit(&huart2, (uint8_t *)row16TxBuffer, (COUNTOF(row16TxBuffer) - 1),5000);
+   while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY)
+    {
+    }
    UART_Communication_Task();
    SIXSTEP_parameters.Button_ready = TRUE;
  }
 /**
-  * @} 
+  * @}
   */
 
 
@@ -224,7 +224,7 @@ void UART_Communication_Task()
 uint32_t UART_num_decode()
 {
  static char Value_Buffer[RXBUFFERSIZE];
- 
+
  for(uint8_t i=0;i<BUFF_RCV;i++)
   {
     Value_Buffer[i] = aRxBuffer[i];
@@ -232,7 +232,7 @@ uint32_t UART_num_decode()
 return(atoi(Value_Buffer));
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup UART_Set_Value    UART_Set_Value
@@ -241,93 +241,93 @@ return(atoi(Value_Buffer));
 */
 void UART_Set_Value()
 {
- if(Get_UART_Data() == 266 && (huart2.State != HAL_UART_STATE_BUSY_TX && huart2.State != HAL_UART_STATE_BUSY_TX_RX)) 
+ if(Get_UART_Data() == 266 && (huart2.State != HAL_UART_STATE_BUSY_TX && huart2.State != HAL_UART_STATE_BUSY_TX_RX))
   {
    if(Uart_cmd_flag == 0)
-    {     
+    {
      CMD_Parser((char*)aRxBuffer);
     }
-   else 
+   else
    {
     SIXSTEP_parameters.Uart_value_to_set = UART_num_decode();
-    
-    switch(SIXSTEP_parameters.Uart_cmd_to_set) 
+
+    switch(SIXSTEP_parameters.Uart_cmd_to_set)
     {
      case SETSPD_CMD:  /*!<  Set the new speed value command received */
         PI_parameters.Reference = SIXSTEP_parameters.Uart_value_to_set;
         SIXSTEP_parameters.Ramp_Start = 1;
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-        huart2.State = HAL_UART_STATE_READY;        
+        huart2.State = HAL_UART_STATE_READY;
         break;
-     case INIREF_CMD:  /*!<  Set the new STARUP_CURRENT_REFERENCE value command received */     
-        SIXSTEP_parameters.Ireference = SIXSTEP_parameters.Uart_value_to_set;  
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+     case INIREF_CMD:  /*!<  Set the new STARUP_CURRENT_REFERENCE value command received */
+        SIXSTEP_parameters.Ireference = SIXSTEP_parameters.Uart_value_to_set;
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
-        UART_FLAG_RECEIVE = TRUE;      
-      break; 
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
+        UART_FLAG_RECEIVE = TRUE;
+      break;
      case POLESP_CMD:  /*!<  Set the Pole Pairs value command received */
-        SIXSTEP_parameters.NUMPOLESPAIRS = SIXSTEP_parameters.Uart_value_to_set;  
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        SIXSTEP_parameters.NUMPOLESPAIRS = SIXSTEP_parameters.Uart_value_to_set;
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-      break;  
+      break;
      case ACCELE_CMD:  /*!<  Set the Accelleration for Start-up of the motor command received */
-        SIXSTEP_parameters.ACCEL = SIXSTEP_parameters.Uart_value_to_set;  
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        SIXSTEP_parameters.ACCEL = SIXSTEP_parameters.Uart_value_to_set;
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-       break;   
+       break;
      case DIRECT_CMD:  /*!<  Set the motor direction */
-        SIXSTEP_parameters.CW_CCW = SIXSTEP_parameters.Uart_value_to_set;  
-        MC_Set_PI_param(&PI_parameters);         
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        SIXSTEP_parameters.CW_CCW = SIXSTEP_parameters.Uart_value_to_set;
+        MC_Set_PI_param(&PI_parameters);
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-       break;            
+       break;
      case KP_PRM_CMD:  /*!<  Set the KP PI param command received */
-        PI_parameters.Kp_Gain = SIXSTEP_parameters.Uart_value_to_set;  
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        PI_parameters.Kp_Gain = SIXSTEP_parameters.Uart_value_to_set;
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-       break;  
+       break;
      case KI_PRM_CMD:  /*!<  Set the KI PI param command received */
-        PI_parameters.Ki_Gain = SIXSTEP_parameters.Uart_value_to_set;  
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        PI_parameters.Ki_Gain = SIXSTEP_parameters.Uart_value_to_set;
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-       break;     
+       break;
       case POTENZ_CMD:  /*!<  Enable Potentiometer command received */
-        BUFF_RCV = RXBUFFERSIZE;        
-        Uart_cmd_flag = 0;       
+        BUFF_RCV = RXBUFFERSIZE;
+        Uart_cmd_flag = 0;
         huart2.State = HAL_UART_STATE_READY;
-        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);        
+        HAL_UART_Transmit(&huart2, (uint8_t *)rowLxBuffer, (COUNTOF(rowLxBuffer) - 1),5000);
         UART_FLAG_RECEIVE = TRUE;
-        SIXSTEP_parameters.Potentiometer = SIXSTEP_parameters.Uart_value_to_set;          
+        SIXSTEP_parameters.Potentiometer = SIXSTEP_parameters.Uart_value_to_set;
       break;
       }  /* switch case */
     }  /* else */
-  }  /* if */  
+  }  /* if */
 }
 /**
-  * @} 
+  * @}
   */
 
-    
+
 /** @defgroup CMD_MSG    CMD_MSG
   *  @{
     * @brief UART Transmit standard message
@@ -337,11 +337,11 @@ void CMD_MSG()
     HAL_UART_Transmit(&huart2, (uint8_t *)rowVTxBuffer, (COUNTOF(rowVTxBuffer) - 1),5000);
     BUFF_RCV = RXBUFFERSIZE - 1;
     Uart_cmd_flag = 1;
-    UART_FLAG_RECEIVE = TRUE;    
-    huart2.State = HAL_UART_STATE_READY;        
+    UART_FLAG_RECEIVE = TRUE;
+    huart2.State = HAL_UART_STATE_READY;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_MSG_BOOL    CMD_MSG_BOOL
@@ -352,123 +352,123 @@ void CMD_MSG_BOOL()
 {
     huart2.State = HAL_UART_STATE_READY;
     HAL_UART_Transmit(&huart2, (uint8_t *)rowVTBxBuffer, (COUNTOF(rowVTBxBuffer) - 1),5000);
-    BUFF_RCV = RXBUFFERSIZE - 1;        
+    BUFF_RCV = RXBUFFERSIZE - 1;
     Uart_cmd_flag = 1;
-    UART_FLAG_RECEIVE = TRUE;       
+    UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_MSG_BOOL_DIRECT    CMD_MSG_BOOL_DIRECT
   *  @{
     * @brief UART Transmit CW or CCW message for input data
-*/  
+*/
 void CMD_MSG_BOOL_DIRECT()
 {
     huart2.State = HAL_UART_STATE_READY;
     HAL_UART_Transmit(&huart2, (uint8_t *)rowV1TBxBuffer, (COUNTOF(rowV1TBxBuffer) - 1),5000);
-    BUFF_RCV = RXBUFFERSIZE - 1;        
+    BUFF_RCV = RXBUFFERSIZE - 1;
     Uart_cmd_flag = 1;
-    UART_FLAG_RECEIVE = TRUE;       
+    UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_STARTM    CMD_STARTM
   *  @{
-    * @brief UART Transmit Start motor message  
-*/ 
+    * @brief UART Transmit Start motor message
+*/
 void CMD_STARTM()
-{     
+{
   /*!<  Start Motor command received */
-      huart2.State = HAL_UART_STATE_READY;        
-      HAL_UART_Transmit(&huart2, (uint8_t *)rowMxBuffer, (COUNTOF(rowMxBuffer) - 1),5000);         
+      huart2.State = HAL_UART_STATE_READY;
+      HAL_UART_Transmit(&huart2, (uint8_t *)rowMxBuffer, (COUNTOF(rowMxBuffer) - 1),5000);
       MC_StartMotor();
-      Enable_start_button = FALSE;   
-      UART_FLAG_RECEIVE = TRUE;    
+      Enable_start_button = FALSE;
+      UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_STOPMT    CMD_STOPMT
   *  @{
-    * @brief UART Transmit Stop motor message  
+    * @brief UART Transmit Stop motor message
 */
 void CMD_STOPMT()
-{      
+{
   /*!<  Stop Motor command received */
-      huart2.State = HAL_UART_STATE_READY;         
-      HAL_UART_Transmit(&huart2, (uint8_t *)rowSxBuffer, (COUNTOF(rowSxBuffer) - 1),5000);               
+      huart2.State = HAL_UART_STATE_READY;
+      HAL_UART_Transmit(&huart2, (uint8_t *)rowSxBuffer, (COUNTOF(rowSxBuffer) - 1),5000);
       MC_StopMotor();
-      Enable_start_button = FALSE;         
-      UART_FLAG_RECEIVE = TRUE;   
+      Enable_start_button = FALSE;
+      UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_SETSPD    CMD_SETSPD
   *  @{
-    * @brief UART Change the motor speed  
-*/ 
+    * @brief UART Change the motor speed
+*/
 void CMD_SETSPD()
-{    
+{
  /*!<  Set the new speed value command received */
         CMD_MSG();
         SIXSTEP_parameters.Uart_cmd_to_set = SETSPD_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_GETSPD    CMD_GETSPD
   *  @{
-    * @brief UART Get the motor speed  
+    * @brief UART Get the motor speed
 */
 void CMD_GETSPD()
-{    
- /*!<  Get Mechanical Motor Speed command received */  
+{
+ /*!<  Get Mechanical Motor Speed command received */
       static char strLineMessage[40];
 
-      huart2.State = HAL_UART_STATE_READY; 
-      sprintf(strLineMessage, "-- The Motor Speed is: %d RPM -- \r\n >", SIXSTEP_parameters.speed_fdbk_filtered); 
-      HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage,sizeof(strLineMessage),5000);           
-      UART_FLAG_RECEIVE = TRUE; 
+      huart2.State = HAL_UART_STATE_READY;
+      sprintf(strLineMessage, "-- The Motor Speed is: %d RPM -- \r\n >", SIXSTEP_parameters.speed_fdbk_filtered);
+      HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage,sizeof(strLineMessage),5000);
+      UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_POTENZ    CMD_POTENZ
   *  @{
     * @brief UART Enable the potentiometer
-*/ 
+*/
 void CMD_POTENZ()
-{    
+{
  /*!<  Enable Potentiometer command received */
       CMD_MSG_BOOL();
       SIXSTEP_parameters.Uart_cmd_to_set = POTENZ_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_HELP    CMD_HELP
   *  @{
     * @brief UART Help command
-*/ 
+*/
 void CMD_HELP()
 {
  /*!<  Help command received */
-      huart2.State = HAL_UART_STATE_READY; 
-      MC_UI_INIT();       
-      UART_FLAG_RECEIVE = TRUE; 
-}  
+      huart2.State = HAL_UART_STATE_READY;
+      MC_UI_INIT();
+      UART_FLAG_RECEIVE = TRUE;
+}
 /**
-  * @} 
+  * @}
   */
 
 
@@ -483,7 +483,7 @@ void CMD_INIREF()
       SIXSTEP_parameters.Uart_cmd_to_set = INIREF_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 
@@ -495,10 +495,10 @@ void CMD_POLESP()
 {
  /*!<  Set the Pole Pairs value command received */
       CMD_MSG();
-      SIXSTEP_parameters.Uart_cmd_to_set = POLESP_CMD;      
+      SIXSTEP_parameters.Uart_cmd_to_set = POLESP_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_ACCELE    CMD_ACCELE
@@ -507,12 +507,12 @@ void CMD_POLESP()
 */
 void CMD_ACCELE()
 {
- /*!<  Set the Accelleration for Start-up of the motor command received */  
+ /*!<  Set the Accelleration for Start-up of the motor command received */
       CMD_MSG();
-      SIXSTEP_parameters.Uart_cmd_to_set = ACCELE_CMD;  
+      SIXSTEP_parameters.Uart_cmd_to_set = ACCELE_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_DIRECTION   CMD_DIRECTION
@@ -520,13 +520,13 @@ void CMD_ACCELE()
     * @brief UART Set the motor direction
 */
 void CMD_DIRECTION()
-{ 
+{
  /*!<  Enable the DEMAG dynamic control command received */
       CMD_MSG_BOOL_DIRECT();
-      SIXSTEP_parameters.Uart_cmd_to_set = DIRECT_CMD;        
+      SIXSTEP_parameters.Uart_cmd_to_set = DIRECT_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_KP_PRM    CMD_KP_PRM
@@ -534,13 +534,13 @@ void CMD_DIRECTION()
     * @brief UART Set the  KP PI param
 */
 void CMD_KP_PRM()
-{ 
-  /*!<  Set the KP PI param command received */  
+{
+  /*!<  Set the KP PI param command received */
       CMD_MSG();
-      SIXSTEP_parameters.Uart_cmd_to_set = KP_PRM_CMD;     
+      SIXSTEP_parameters.Uart_cmd_to_set = KP_PRM_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_KI_PRM    CMD_KI_PRM
@@ -548,13 +548,13 @@ void CMD_KP_PRM()
     * @brief UART Set the KI PI param
 */
 void CMD_KI_PRM()
-{ 
- /*!<  Set the KI PI param command received */    
+{
+ /*!<  Set the KI PI param command received */
       CMD_MSG();
-      SIXSTEP_parameters.Uart_cmd_to_set = KI_PRM_CMD;     
+      SIXSTEP_parameters.Uart_cmd_to_set = KI_PRM_CMD;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_STATUS    CMD_STATUS
@@ -568,61 +568,61 @@ void CMD_STATUS()
    static char strLineMessage3[30];
    static char strLineMessage4[30];
    static char strLineMessage5[30];
-   static char strLineMessage6[30]; 
+   static char strLineMessage6[30];
    static char strLineMessage7[30];
-   static char strLineMessage8[30];  
- 
-   huart2.State = HAL_UART_STATE_READY;   
+   static char strLineMessage8[30];
+
+   huart2.State = HAL_UART_STATE_READY;
    switch (SIXSTEP_parameters.STATUS)
      {
          case STARTUP:
               sprintf(strLineMessage1, " -- The status is: STARTUP --\r\n >");
-              HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage1,sizeof(strLineMessage1),5000);                
-          break; 
+              HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage1,sizeof(strLineMessage1),5000);
+          break;
           case VALIDATION:
              sprintf(strLineMessage2, " -- The status is: VALIDATION --\r\n >");
-             HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage2,sizeof(strLineMessage2),5000);                   
+             HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage2,sizeof(strLineMessage2),5000);
           break;
           case START:
             sprintf(strLineMessage3, " -- The status is: START --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage3,sizeof(strLineMessage3),5000);                
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage3,sizeof(strLineMessage3),5000);
           break;
-          case STOP: 
+          case STOP:
             sprintf(strLineMessage4, " -- The status is: STOP --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage4,sizeof(strLineMessage4),5000);                
-          break;   
-          case RUN: 
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage4,sizeof(strLineMessage4),5000);
+          break;
+          case RUN:
             sprintf(strLineMessage5, " -- The status is: RUN --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage5,sizeof(strLineMessage5),5000);                
-          break;             
-          case ALIGNMENT: 
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage5,sizeof(strLineMessage5),5000);
+          break;
+          case ALIGNMENT:
             sprintf(strLineMessage6, " -- The status is: ALIGNMENT --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage6,sizeof(strLineMessage6),5000);                
-          break;   
-          case SPEEDFBKERROR: 
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage6,sizeof(strLineMessage6),5000);
+          break;
+          case SPEEDFBKERROR:
             sprintf(strLineMessage7, " -- The status is: SPEEDFBKERROR --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage7,sizeof(strLineMessage7),5000);                  
-          break;    
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage7,sizeof(strLineMessage7),5000);
+          break;
           default:
             sprintf(strLineMessage8, " -- The status is: IDLE --\r\n >");
-            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage8,sizeof(strLineMessage8),5000);                
-          break; 
+            HAL_UART_Transmit(&huart2, (uint8_t*) strLineMessage8,sizeof(strLineMessage8),5000);
+          break;
        }
-      UART_FLAG_RECEIVE = TRUE; 
+      UART_FLAG_RECEIVE = TRUE;
 }
 /**
-  * @} 
+  * @}
   */
 
 /** @defgroup CMD_Parser    CMD_Parser
   *  @{
-    * @brief UART String parser 
+    * @brief UART String parser
 */
 void CMD_Parser(char* pCommandString)
 {
     static uint8_t CmdListIndex;
     char sCmd[16];
-    
+
     strcpy(sCmd, pCommandString);
     strtok (sCmd, TOKEN);
     /* Command Callback identification */
@@ -640,21 +640,21 @@ void CMD_Parser(char* pCommandString)
     }
     else{
           huart2.State = HAL_UART_STATE_READY;
-          HAL_UART_Transmit(&huart2, (uint8_t *)rowETxBuffer, (COUNTOF(rowETxBuffer) - 1),5000);   
-          BUFF_RCV = RXBUFFERSIZE;        
-          Uart_cmd_flag = 0;   
-          UART_FLAG_RECEIVE = TRUE;  
+          HAL_UART_Transmit(&huart2, (uint8_t *)rowETxBuffer, (COUNTOF(rowETxBuffer) - 1),5000);
+          BUFF_RCV = RXBUFFERSIZE;
+          Uart_cmd_flag = 0;
+          UART_FLAG_RECEIVE = TRUE;
           return;
     }
 }
 
 /**
-  * @} 
+  * @}
   */
 
 
 /**
-  * @}  end UART_UI 
+  * @}  end UART_UI
   */
 
 /**

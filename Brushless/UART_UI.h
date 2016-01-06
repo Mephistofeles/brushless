@@ -52,22 +52,22 @@ typedef struct {
   void (*pCmdFunc)(void);
 } CMD_T;
 
-/** @addtogroup MIDDLEWARES     MIDDLEWARES 
+/** @addtogroup MIDDLEWARES     MIDDLEWARES
   * @brief  Middlewares Layer
-  * @{ 
+  * @{
   */
 
 
 /** @addtogroup UART_UI  UART_UI
   * @brief  Serial communication through PC serial terminal
-  * @{ 
+  * @{
   */
 
 /** @defgroup Exported_function_Uart  Exported_function_Uart
 * @{
 */
-/** 
-  * @brief  UART function  
+/**
+  * @brief  UART function
   */
 
 void CMD_STARTM( void );
@@ -80,18 +80,18 @@ void CMD_POTENZ( void );
 void CMD_HELP(void);
 void CMD_INIREF(void);
 void CMD_POLESP(void);
-void CMD_ACCELE(void);  
-void CMD_KP_PRM(void);  
-void CMD_KI_PRM(void);  
+void CMD_ACCELE(void);
+void CMD_KP_PRM(void);
+void CMD_KI_PRM(void);
 
 /**
-  * @} 
+  * @}
   */
 
 /**
-  * @} 
+  * @}
   */
 
 /**
-  * @} 
+  * @}
   */

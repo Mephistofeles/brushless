@@ -38,7 +38,7 @@
 /* USER CODE BEGIN 0 */
 #include "6Step_Lib.h"
 
-extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters; /*!< Main SixStep structure*/ 
+extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters; /*!< Main SixStep structure*/
 /* USER CODE END 0 */
 /* External variables --------------------------------------------------------*/
 
@@ -49,7 +49,7 @@ extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart2;
 
 /******************************************************************************/
-/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 
 /**
@@ -58,7 +58,7 @@ extern UART_HandleTypeDef huart2;
 void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
-   
+
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
   HAL_DAC_IRQHandler(&hdac);
@@ -106,7 +106,7 @@ void USART2_IRQHandler(void)
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
-#ifdef UART_COMM   
+#ifdef UART_COMM
   UART_Set_Value();
 #endif
   /* USER CODE END USART2_IRQn 1 */
@@ -120,8 +120,8 @@ void TIM1_BRK_TIM15_IRQHandler(void)
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
   if(__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_BREAK) != RESET)
   {
-    MC_StopMotor(); 
-    SIXSTEP_parameters.STATUS = OVERCURRENT;        
+    MC_StopMotor();
+    SIXSTEP_parameters.STATUS = OVERCURRENT;
   }
   /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);

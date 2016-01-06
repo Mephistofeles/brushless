@@ -34,7 +34,7 @@ int main2(void)
 		int totalCycles = 5000;
 		int onCycles = (int)(totalCycles * (g_Sin + 1)) / 2;
 		int offCycles = totalCycles - onCycles;
-		
+
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
 		for (int i = 0; i < onCycles; i++)
 			asm("nop");

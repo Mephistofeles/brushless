@@ -35,19 +35,19 @@
  ******************************************************************************
  */
 
-/** @addtogroup DRIVERS     DRIVERS 
+/** @addtogroup DRIVERS     DRIVERS
   * @brief  Driver Layer
-  * @{ 
+  * @{
   */
 
-/** @addtogroup BSP     BSP 
+/** @addtogroup BSP     BSP
   * @brief  BSP Layer
-  * @{ 
+  * @{
   */
 
 /** @addtogroup X-NUCLEO-IHM07M1    X-NUCLEO-IHM07M1
   * @brief  X-Nucleo board
-  * @{ 
+  * @{
   */
 
 
@@ -69,107 +69,107 @@
 #include "stm32f4xx_hal.h"
 #include "stm32F401_nucleo_ihm07m1.h"
 #endif
-		
+
 
 /** @defgroup L6230_ECH1CH2_DCH3_IO_Write    L6230_ECH1CH2_DCH3_IO_Write
   *  @{
-	* @brief Enable Input channel CH1 and CH2 for L6230   
+	* @brief Enable Input channel CH1 and CH2 for L6230
   * @retval None
 */
 
 void L6230_ECH1CH2_DCH3_IO_Write()
 {
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);      //EN1 ENABLE               
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);      //EN1 ENABLE
 	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);      //EN2 DISABLE
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_RESET);    //EN3 ENABLE    
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_RESET);    //EN3 ENABLE
 }
 /**
-  * @}  
+  * @}
   */
 
 /** @defgroup L6230_ECH1CH3_DCH2_IO_Write    L6230_ECH1CH3_DCH2_IO_Write
   *  @{
-	* @brief Enable Input channel CH1 and CH3 for L6230   
+	* @brief Enable Input channel CH1 and CH3 for L6230
   * @retval None
 */
 
 void L6230_ECH1CH3_DCH2_IO_Write()
 {
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);    //EN1 ENABLE               
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);    //EN1 ENABLE
 	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_RESET);  //EN2 DISABLE
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);    //EN3 ENABLE    
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);    //EN3 ENABLE
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_ECH2CH3_DCH1_IO_Write    L6230_ECH2CH3_DCH1_IO_Write
   *  @{
-	* @brief Enable Input channel CH2 and CH3 for L6230   
+	* @brief Enable Input channel CH2 and CH3 for L6230
   * @retval None
 */
 void L6230_ECH2CH3_DCH1_IO_Write()
 {
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_RESET);  //EN1 DISABLE               
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_RESET);  //EN1 DISABLE
 	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);    //EN2 ENABLE
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);    //EN3 ENABLE   
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);    //EN3 ENABLE
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_DCH1CH2CH3_IO_Write    L6230_DCH1CH2CH3_IO_Write
   *  @{
-	* @brief Disable all channels for L6230   
+	* @brief Disable all channels for L6230
   * @retval None
 */
 void L6230_DCH1CH2CH3_IO_Write()
 {
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_RESET);  //EN1 DISABLE          
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_RESET);  //EN1 DISABLE
 	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_RESET);  //EN2 DISABLE
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_RESET);  //EN3 DISABLE   
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_RESET);  //EN3 DISABLE
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_Start_PWM_generation    L6230_Start_PWM_generation
   *  @{
-	* @brief Enable the PWM generation on Input channels for L6230 
+	* @brief Enable the PWM generation on Input channels for L6230
   * @retval None
 */
 
 void L6230_Start_PWM_generation()
 {
-	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH1);           //TIM1_CH1 ENABLE   
-	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH2);           //TIM1_CH2 ENABLE   
-	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH3);           //TIM1_CH3 ENABLE  
+	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH1);           //TIM1_CH1 ENABLE
+	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH2);           //TIM1_CH2 ENABLE
+	HAL_TIM_PWM_Start(&HF_TIMx, HF_TIMx_CH3);           //TIM1_CH3 ENABLE
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_Stop_PWM_generation    L6230_Stop_PWM_generation
   *  @{
-	* @brief Disable the PWM generation on Input channels for L6230 
+	* @brief Disable the PWM generation on Input channels for L6230
   * @retval None
 */
 void L6230_Stop_PWM_generation()
 {
-	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH1);           //TIM1_CH1 DISABLE   
-	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH2);           //TIM1_CH2 DISABLE   
-	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH3);           //TIM1_CH3 DISABLE  
+	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH1);           //TIM1_CH1 DISABLE
+	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH2);           //TIM1_CH2 DISABLE
+	HAL_TIM_PWM_Stop(&HF_TIMx, HF_TIMx_CH3);           //TIM1_CH3 DISABLE
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_HFTIM_DC_CH1    L6230_HFTIM_DC_CH1
   *  @{
-	* @brief Set the Duty Cycle value for CH1  
+	* @brief Set the Duty Cycle value for CH1
   * @retval None
 */
 void L6230_HFTIM_DC_CH1(uint16_t CCRx)
 {
-	HF_TIMx.Instance->HF_TIMx_CCR1 = CCRx;  
+	HF_TIMx.Instance->HF_TIMx_CCR1 = CCRx;
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_HFTIM_DC_CH2    L6230_HFTIM_DC_CH2
   *  @{
@@ -178,22 +178,22 @@ void L6230_HFTIM_DC_CH1(uint16_t CCRx)
 */
 void  L6230_HFTIM_DC_CH2(uint16_t CCRx)
 {
-	HF_TIMx.Instance->HF_TIMx_CCR2 = CCRx;  
+	HF_TIMx.Instance->HF_TIMx_CCR2 = CCRx;
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup L6230_HFTIM_DC_CH3    L6230_HFTIM_DC_CH3
   *  @{
-	* @brief Set the Duty Cycle value for CH3  
+	* @brief Set the Duty Cycle value for CH3
   * @retval None
 */
 void  L6230_HFTIM_DC_CH3(uint16_t CCRx)
 {
-	HF_TIMx.Instance->HF_TIMx_CCR3 = CCRx;  
+	HF_TIMx.Instance->HF_TIMx_CCR3 = CCRx;
 }
 /**
-  * @}  
+  * @}
   */
 
 /** @defgroup BSP_X_NUCLEO_FAULT_LED_ON    BSP_X_NUCLEO_FAULT_LED_ON
@@ -206,7 +206,7 @@ void BSP_X_NUCLEO_FAULT_LED_ON()
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
 }
 /**
-  * @}  
+  * @}
   */
 /** @defgroup BSP_X_NUCLEO_FAULT_LED_OFF    BSP_X_NUCLEO_FAULT_LED_OFF
   *  @{
@@ -218,10 +218,10 @@ void BSP_X_NUCLEO_FAULT_LED_OFF()
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
 }
 /**
-  * @}  
+  * @}
   */
 /**
-  * @}  end X-NUCLEO-IHM07M1 
+  * @}  end X-NUCLEO-IHM07M1
   */
 
 /**

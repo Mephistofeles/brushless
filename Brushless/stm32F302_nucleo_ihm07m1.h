@@ -84,7 +84,7 @@
 #define HF_TIMx_CCR2          CCR2            /*Channel 2*/
 #define HF_TIMx_CCR3          CCR3            /*Channel 3*/
 
-#define DAC_ENABLE            1               /*!< Enable (1) the DAC peripheral */  
+#define DAC_ENABLE            1               /*!< Enable (1) the DAC peripheral */
 #define DACx                  hdac
 #define DACx_CH               DAC1_CHANNEL_1  /*!<  DAC Channel */
 #define DACx_ALIGN            DAC_ALIGN_12B_L  /*!< DAC Aligment value */
@@ -110,13 +110,13 @@
 
   /** @addtogroup stm32F302_nucleo_ihm07m1    stm32F302_nucleo_ihm07m1
   * @brief  Interface file for STM32F302 and Library configuration
-  * @{ 
+  * @{
   */
 
   /** @defgroup Exported_function_F302  Exported_function_F302
   * @{
   */
-  /** 
+  /**
     * @brief  API function for STM32 instruction
     */
 uint32_t Get_UART_Data(void);
@@ -128,7 +128,7 @@ void Set_Ref_Generation(uint16_t);
 void START_DAC(void);
 void STOP_DAC(void);
 void SET_DAC_value(uint16_t);
-void Bemf_delay_calc(void);  
+void Bemf_delay_calc(void);
 void MC_SixStep_EnableInput_CH1_E_CH2_E_CH3_D(void);
 void MC_SixStep_EnableInput_CH1_E_CH2_D_CH3_E(void);
 void MC_SixStep_EnableInput_CH1_D_CH2_E_CH3_E(void);
@@ -141,13 +141,13 @@ void MC_SixStep_HF_TIMx_SetDutyCycle_CH3(uint16_t);
 void MC_SixStep_Current_Reference_Start(void);
 void MC_SixStep_Current_Reference_Stop(void);
 void MC_SixStep_Current_Reference_Setvalue(uint16_t);
-  
+
 /**
-* @} 
+* @}
 */
-  
+
 /**
-* @} 
+* @}
 */
 
 #endif
