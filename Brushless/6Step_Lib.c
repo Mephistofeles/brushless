@@ -54,7 +54,7 @@ The main function are the following:
 *******************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h>
+//#include <stdint.h>
 #include "6Step_Lib.h"
 
 #include <string.h>

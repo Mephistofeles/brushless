@@ -40,8 +40,6 @@
 #ifndef __STM32F302_NUCLEO_IHM07M1_H
 #define __STM32F302_NUCLEO_IHM07M1_H
 
-#include <stdint.h>
-
 #include "main_F302.h"
 #include "X-NUCLEO-IHM07M1.h"
 
