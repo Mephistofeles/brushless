@@ -37,9 +37,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeIncludeSearchPath>.;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\arm-eabi\thumb\fpu\cortex_m4;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\backward;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include-fixed;c:\sysgcc\arm-eabi\arm-eabi\sys-include;c:\sysgcc\arm-eabi\arm-eabi\include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\RTOS;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>.;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\RTOS;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\arm-eabi\thumb\fpu\cortex_m4;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\backward;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include-fixed;c:\sysgcc\arm-eabi\arm-eabi\sys-include;c:\sysgcc\arm-eabi\arm-eabi\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\stm32_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
-    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
@@ -47,6 +46,7 @@
     <IncludePath />
     <ReferencePath />
     <LibraryPath />
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakeIncludeSearchPath>.;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\arm-eabi\thumb\fpu\cortex_m4;c:\sysgcc\arm-eabi\arm-eabi\include\c++\5.3.0\backward;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include;c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\5.3.0\include-fixed;c:\sysgcc\arm-eabi\arm-eabi\sys-include;c:\sysgcc\arm-eabi\arm-eabi\include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include;$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\RTOS;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
@@ -63,7 +63,6 @@
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\StartupFiles\startup_stm32f302x8.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_adc_ex.c" />
@@ -114,8 +113,17 @@
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_usart.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_fmc.c" />
+    <ClCompile Include="6Step_Lib.c" />
+    <ClCompile Include="l6230.c" />
     <ClCompile Include="LEDBlink.cpp" />
+    <ClCompile Include="main_F302.c" />
+    <ClCompile Include="stm32F302_nucleo_ihm07m1.c" />
+    <ClCompile Include="stm32f3xx_hal_msp.c" />
+    <ClCompile Include="stm32f3xx_it.c" />
+    <ClCompile Include="stm32f3xx_nucleo.c" />
     <ClCompile Include="system_stm32f3xx.c" />
+    <ClCompile Include="UART_UI.c" />
+    <ClCompile Include="X-NUCLEO-IHM07M1.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include\stm32f301x8.h" />
@@ -203,7 +211,18 @@
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_usart_ex.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal_wwdg.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc\stm32f3xx_ll_fmc.h" />
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Drivers\BSP\Components\Common\MC_Common.h" />
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h" />
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h" />
+    <ClInclude Include="6Step_Lib.h" />
+    <ClInclude Include="l6230.h" />
+    <ClInclude Include="main_F302.h" />
+    <ClInclude Include="stm32F302_nucleo_ihm07m1.h" />
     <ClInclude Include="stm32f3xx_hal_conf.h" />
+    <ClInclude Include="stm32f3xx_it.h" />
+    <ClInclude Include="stm32f3xx_nucleo.h" />
+    <ClInclude Include="UART_UI.h" />
+    <ClInclude Include="X-NUCLEO-IHM07M1.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="debug.mak" />

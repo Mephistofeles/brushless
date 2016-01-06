@@ -4,15 +4,15 @@
 #ifdef __cplusplus
 extern "C"
 #endif
-void SysTick_Handler(void)
-{
-	HAL_IncTick();
-	HAL_SYSTICK_IRQHandler();
-}
+//void SysTick_Handler(void)
+//{
+	//HAL_IncTick();
+	//HAL_SYSTICK_IRQHandler();
+//}
 
 float g_Arg, g_Sin, g_Cos;
 
-int main(void)
+int main2(void)
 {
 	HAL_Init();
 

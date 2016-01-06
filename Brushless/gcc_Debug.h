@@ -594,6 +594,9 @@
 #ifndef __UDQ_FBIT__
 #define __UDQ_FBIT__ 64
 #endif
+#ifndef DEBUG
+#define DEBUG 1
+#endif
 #ifndef __INT8_TYPE__
 #define __INT8_TYPE__ signed char
 #endif
@@ -635,6 +638,9 @@
 #endif
 #ifndef __SIZEOF_PTRDIFF_T__
 #define __SIZEOF_PTRDIFF_T__ 4
+#endif
+#ifndef stm32_flash_layout
+#define stm32_flash_layout 1
 #endif
 #ifndef __LACCUM_EPSILON__
 #define __LACCUM_EPSILON__ 0x1P-31LK
@@ -1068,25 +1074,23 @@
 #ifndef __QQ_IBIT__
 #define __QQ_IBIT__ 0
 #endif
+#ifndef STM32F302x8
+#define STM32F302x8 1
+#endif
 #ifndef __ATOMIC_ACQ_REL
 #define __ATOMIC_ACQ_REL 4
 #endif
 #ifndef __ATOMIC_RELEASE
 #define __ATOMIC_RELEASE 3
 #endif
-#ifndef DEBUG
-#define DEBUG 1
-#endif
-#ifndef stm32_flash_layout
-#define stm32_flash_layout 
-#endif
-#ifndef STM32F302x8
-#define STM32F302x8 
-#endif
 #endif
 
 // --- Include directories begin --- //
 //.
+//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/STM32F3xx_HAL_Driver/Inc
+//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/Device/ST/STM32F3xx/Include
+//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/Include
+//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/RTOS
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/../../../../arm-eabi/include/c++/5.3.0
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/../../../../arm-eabi/include/c++/5.3.0/arm-eabi/thumb/fpu/cortex_m4
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/../../../../arm-eabi/include/c++/5.3.0/backward
@@ -1094,10 +1098,6 @@
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/include-fixed
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/../../../../arm-eabi/sys-include
 //c:\sysgcc\arm-eabi\bin\../lib/gcc/arm-eabi/5.3.0/../../../../arm-eabi/include
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/STM32F3xx_HAL_Driver/Inc
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/Device/ST/STM32F3xx/Include
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/Include
-//$(LOCALAPPDATA)\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32F3xxxx/CMSIS_HAL/RTOS
 // --- Include directories end --- //
 
 

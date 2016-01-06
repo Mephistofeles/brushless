@@ -29,6 +29,12 @@
     <Filter Include="Header files\Device-specific files\HAL">
       <UniqueIdentifier>{02bbf12d-f6e5-4156-9969-aa6022d87cd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\Drivers">
+      <UniqueIdentifier>{4150a8a4-a1bf-47d8-a120-cb317c30dcbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Drivers">
+      <UniqueIdentifier>{3e00f112-e43c-4a4b-acb8-d5f9df54d1e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LEDBlink.cpp">
@@ -36,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="system_stm32f3xx.c">
       <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\StartupFiles\startup_stm32f302x8.c">
-      <Filter>Source files\Device-specific files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal.c">
       <Filter>Source files\Device-specific files\HAL</Filter>
@@ -190,11 +193,35 @@
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_fmc.c">
       <Filter>Source files\Device-specific files\HAL</Filter>
     </ClCompile>
+    <ClCompile Include="X-NUCLEO-IHM07M1.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32F302_nucleo_ihm07m1.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="l6230.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="6Step_Lib.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="main_F302.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="UART_UI.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f3xx_nucleo.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f3xx_it.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f3xx_hal_msp.c">
+      <Filter>Source files\Drivers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stm32f3xx_hal_conf.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
@@ -449,6 +476,42 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\RTOS\cmsis_os.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="X-NUCLEO-IHM07M1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32F302_nucleo_ihm07m1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="l6230.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Drivers\BSP\Components\Common\MC_Common.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="6Step_Lib.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="main_F302.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_nucleo.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="UART_UI.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_hal_conf.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_it.h">
+      <Filter>Header files\Drivers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
