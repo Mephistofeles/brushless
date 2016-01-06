@@ -53,21 +53,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "X-NUCLEO-IHM07M1.h"
-#ifdef STM32F030x8
-#include "stm32f0xx_hal.h"
-#include "stm32F030_nucleo_ihm07m1.h"
-#endif
-#ifdef STM32F103xB
-#include "stm32f1xx_hal.h"
-#include "stm32F103_nucleo_ihm07m1.h"
-#endif
 #ifdef STM32F302x8
 #include "stm32f3xx_hal.h"
 #include "stm32F302_nucleo_ihm07m1.h"
-#endif
-#ifdef STM32F401xE
-#include "stm32f4xx_hal.h"
-#include "stm32F401_nucleo_ihm07m1.h"
 #endif
 
 

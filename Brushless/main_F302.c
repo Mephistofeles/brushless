@@ -40,6 +40,9 @@
 
 /* USER CODE BEGIN Includes */
 #include "6Step_Lib.h"
+#include <stdbool.h>
+#include <arm_math.h>
+#include "l6230.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -55,6 +58,7 @@ TIM_HandleTypeDef htim16;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
+float degree = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,6 +78,67 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
+
+void SVPWM_run(float a, float m)
+{
+	float Ualpha, Ubeta;
+	float X, Y, Z;
+	float PWMa, PWMb, PWMc;
+	uint8_t sector;
+
+	Ualpha = m * cos(a);
+	Ubeta = m * sin(a);
+
+	X = Ubeta;
+	Y = Ubeta * 0.5f + Ualpha * 0.8660254f; //(Ubeta + Ualpha*sqrt(3))/2
+	Z = X - Y;				//(Ubeta - Ualpha*sqrt(3))/2
+
+	if (a < PI / 3) sector = 0;
+	else if (a < 2 * PI / 3) sector = 1;
+	else if (a < 3 * PI / 3) sector = 2;
+	else if (a < 4 * PI / 3) sector = 3;
+	else if (a < 5 * PI / 3) sector = 4;
+	else sector = 5;
+	//sector = 3;
+	//sector = (Y > 0) ? (sector - 1) : sector;
+	//sector = (Z < 0) ? (sector - 1) : sector;
+	//sector = (X < 0) ? (7 - sector) : sector;
+
+	switch (sector) {
+	case 0:
+	case 3:
+		PWMa = Y;
+		PWMb = X + Z;
+		PWMc = -Y;
+		break;
+	case 1:
+	case 4:
+		PWMa = Y - Z;
+		PWMb = X;
+		PWMc = -X;
+		break;
+	case 2:
+	case 5:
+		PWMa = -Z;
+		PWMb = Z;
+		PWMc = -(Y + X);
+		break;
+	default:
+		break;
+	}
+	
+	uint16_t phase_U_enable_duty_cycle = 32768 + PWMa * 32767;
+	uint16_t phase_V_enable_duty_cycle = 32768 + PWMb * 32767;
+	uint16_t phase_W_enable_duty_cycle = 32768 + PWMc * 32767;
+	
+	uint8_t phase_U_direction = PWMa > 0;
+	uint8_t phase_V_direction = PWMb > 0;
+	uint8_t phase_W_direction = PWMc > 0;	
+	
+	L6230_HFTIM_DC_CH1(phase_U_enable_duty_cycle);
+	L6230_HFTIM_DC_CH2(phase_V_enable_duty_cycle);
+	L6230_HFTIM_DC_CH3(phase_W_enable_duty_cycle);	
+}
 
 int main(void)
 {
@@ -131,8 +196,18 @@ int main(void)
 	     			  ****************************************************************************/
 
 	     			  	/* Infinite loop */
+	
+	L6230_Start_PWM_generation();
 	while (1)
 	{
+		if (degree >= 2 * PI) {
+			degree = 0;
+		}
+		else {
+			degree += 0.001;
+		}
+
+		SVPWM_run(degree, 1);
 	}
 }
 

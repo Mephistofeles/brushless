@@ -43,11 +43,11 @@
 #include "main_F302.h"
 #include "X-NUCLEO-IHM07M1.h"
 
-#define HF_TIMx               htim1
-#define LF_TIMx               htim6
+#define HF_TIMx               htim1 // High frequency task
+#define LF_TIMx               htim6 // Low frequency task
 #define HALL_ENCODER_TIMx     htim2
 #define ADCx                  hadc1
-#define REFx                  htim16
+#define REFx                  htim16 // Reference current PWM
 #define UART                  huart2
 
 #define GPIO_PORT_1           GPIOC
