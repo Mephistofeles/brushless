@@ -399,6 +399,7 @@
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include\stm32f3xx.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include\system_stm32f3xx.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_const_structs.h" />
+    <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_math.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\core_cm0.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\core_cm0plus.h" />
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\core_cm3.h" />
@@ -469,8 +470,7 @@
     <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h" />
     <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h" />
     <ClInclude Include="6Step_Lib.h" />
-    <ClInclude Include="DSP\DSP_Lib\Include\arm_common_tables.h" />
-    <ClInclude Include="DSP\DSP_Lib\Include\arm_math.h" />
+    <ClInclude Include="arm_common_tables.h" />
     <ClInclude Include="l6230.h" />
     <ClInclude Include="main_F302.h" />
     <ClInclude Include="stm32F302_nucleo_ihm07m1.h" />

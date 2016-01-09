@@ -33,7 +33,6 @@
   <MCUMakFile>stm32.mak</MCUMakFile>
   <ReferencedFrameworks>
     <string>com.sysprogs.arm.stm32.hal</string>
-    <string>com.sysprogs.arm.stm32.hal_systeminit</string>
   </ReferencedFrameworks>
   <FrameworkProperties>
     <Entries />

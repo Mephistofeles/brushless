@@ -89,17 +89,20 @@ void SVPWM_run(float a, float m)
 	//Ualpha = m * cos(a);
 	//Ubeta = m * sin(a);
 	
-	arm_sin_cos_f32(a, &Ubeta, &Ualpha);
+	float angle = a;
+	if (angle >= 180.0f) angle -= 360.0f;
+		
+	arm_sin_cos_f32(angle, &Ubeta, &Ualpha);
 
 	X = Ubeta;
 	Y = Ubeta * 0.5f + Ualpha * 0.8660254f; //(Ubeta + Ualpha*sqrt(3))/2
 	Z = X - Y;				//(Ubeta - Ualpha*sqrt(3))/2
 
-	if (a < PI / 3) sector = 0;
-	else if (a < 2 * PI / 3) sector = 1;
-	else if (a < 3 * PI / 3) sector = 2;
-	else if (a < 4 * PI / 3) sector = 3;
-	else if (a < 5 * PI / 3) sector = 4;
+	if (a < 60) sector = 0;
+	else if (a < 120) sector = 1;
+	else if (a < 180) sector = 2;
+	else if (a < 240) sector = 3;
+	else if (a < 300) sector = 4;
 	else sector = 5;
 	//sector = 3;
 	//sector = (Y > 0) ? (sector - 1) : sector;
@@ -129,9 +132,9 @@ void SVPWM_run(float a, float m)
 		break;
 	}
 	
-	uint16_t phase_U_enable_duty_cycle = 32768 + PWMa * 32767;
-	uint16_t phase_V_enable_duty_cycle = 32768 + PWMb * 32767;
-	uint16_t phase_W_enable_duty_cycle = 32768 + PWMc * 32767;
+	uint16_t phase_U_enable_duty_cycle = 350 + PWMa * 300;
+	uint16_t phase_V_enable_duty_cycle = 350 + PWMb * 300;
+	uint16_t phase_W_enable_duty_cycle = 350 + PWMc * 300;
 	
 	uint8_t phase_U_direction = PWMa > 0;
 	uint8_t phase_V_direction = PWMb > 0;
@@ -139,7 +142,7 @@ void SVPWM_run(float a, float m)
 	
 	L6230_HFTIM_DC_CH1(phase_U_enable_duty_cycle);
 	L6230_HFTIM_DC_CH2(phase_V_enable_duty_cycle);
-	L6230_HFTIM_DC_CH3(phase_W_enable_duty_cycle);	
+	L6230_HFTIM_DC_CH3(phase_W_enable_duty_cycle);
 }
 
 int main(void)
@@ -199,14 +202,26 @@ int main(void)
 
 	     			  	/* Infinite loop */
 	
+	
+	
 	L6230_Start_PWM_generation();
+	//MC_SixStep_Start_PWM_driving();
+	MC_SixStep_Current_Reference_Start();
+	MC_SixStep_Current_Reference_Setvalue(2000);
+
+	
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);
+	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);
+    
+
 	while (1)
 	{
-		if (degree >= 2 * PI) {
+		if (degree >= 360) {
 			degree = 0;
 		}
 		else {
-			degree += 0.001;
+			degree +=  1;
 		}
 
 		SVPWM_run(degree, 1);

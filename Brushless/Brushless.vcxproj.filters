@@ -1026,6 +1026,42 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="X-NUCLEO-IHM07M1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32F302_nucleo_ihm07m1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="l6230.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Drivers\BSP\Components\Common\MC_Common.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="6Step_Lib.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="main_F302.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_nucleo.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="UART_UI.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_hal_conf.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="stm32f3xx_it.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Inc\stm32f3xx_hal.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
@@ -1245,6 +1281,9 @@
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_const_structs.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_math.h">
+      <Filter>Header files\Device-specific files\HAL</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\core_cm0.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
@@ -1275,47 +1314,8 @@
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\RTOS\cmsis_os.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="X-NUCLEO-IHM07M1.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="stm32F302_nucleo_ihm07m1.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="l6230.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Drivers\BSP\Components\Common\MC_Common.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="6Step_Lib.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="main_F302.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="stm32f3xx_nucleo.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="UART_UI.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="stm32f3xx_hal_conf.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="stm32f3xx_it.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="DSP\DSP_Lib\Include\arm_common_tables.h">
-      <Filter>Header files\Device-specific files\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="DSP\DSP_Lib\Include\arm_math.h">
-      <Filter>Header files\Device-specific files\HAL</Filter>
+    <ClInclude Include="arm_common_tables.h">
+      <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
