@@ -86,8 +86,10 @@ void SVPWM_run(float a, float m)
 	float PWMa, PWMb, PWMc;
 	uint8_t sector;
 
-	Ualpha = m * cos(a);
-	Ubeta = m * sin(a);
+	//Ualpha = m * cos(a);
+	//Ubeta = m * sin(a);
+	
+	arm_sin_cos_f32(a, &Ubeta, &Ualpha);
 
 	X = Ubeta;
 	Y = Ubeta * 0.5f + Ualpha * 0.8660254f; //(Ubeta + Ualpha*sqrt(3))/2

@@ -35,11 +35,44 @@
     <Filter Include="Header files\Drivers">
       <UniqueIdentifier>{3e00f112-e43c-4a4b-acb8-d5f9df54d1e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\DSP_Lib">
+      <UniqueIdentifier>{8e4bab94-8890-4e61-9f60-1d54a5ab917a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source">
+      <UniqueIdentifier>{a1bdd99c-64c6-4237-b094-8493f35acdda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\BasicMathFunctions">
+      <UniqueIdentifier>{19e3b208-4dfa-4473-8dab-ccff05e7d494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\CommonTables">
+      <UniqueIdentifier>{992a7af2-74c1-47fd-9f6f-7473e6c78294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\ComplexMathFunctions">
+      <UniqueIdentifier>{b71613c6-f46f-420f-b17a-0a4520ee26a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\ControllerFunctions">
+      <UniqueIdentifier>{06cc0604-23b8-4073-a583-c2043363623b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\FastMathFunctions">
+      <UniqueIdentifier>{61b6f811-26d0-443f-9a21-aa06029d05d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\FilteringFunctions">
+      <UniqueIdentifier>{fd926e1d-184d-49eb-983d-f83a40f1d5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\MatrixFunctions">
+      <UniqueIdentifier>{1a629718-10ba-41d1-a5ba-a15b4b8a3998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\StatisticsFunctions">
+      <UniqueIdentifier>{969e75bd-7238-4fe0-8d46-1bc1c708e3a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\SupportFunctions">
+      <UniqueIdentifier>{58eb1225-3d54-4548-96be-eb15ffbce187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\DSP_Lib\Source\TransformFunctions">
+      <UniqueIdentifier>{fe632ccc-8c8c-4120-b8c5-a4d66dda8371}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LEDBlink.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="system_stm32f3xx.c">
       <Filter>Source files</Filter>
     </ClCompile>
@@ -222,6 +255,774 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\StartupFiles\startup_stm32f302x8.c">
       <Filter>Source files\Device-specific files</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_abs_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_abs_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_abs_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_abs_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_add_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_add_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_add_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_add_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_mult_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_mult_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_mult_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_mult_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_negate_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_negate_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_negate_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_negate_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_offset_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_offset_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_offset_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_offset_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_scale_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_scale_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_scale_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_scale_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_shift_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_shift_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_shift_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_sub_f32.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_sub_q15.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_sub_q31.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\BasicMathFunctions\arm_sub_q7.c">
+      <Filter>Source files\DSP_Lib\Source\BasicMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\CommonTables\arm_common_tables.c">
+      <Filter>Source files\DSP_Lib\Source\CommonTables</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ComplexMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_q15.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_sin_cos_f32.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\ControllerFunctions\arm_sin_cos_q31.c">
+      <Filter>Source files\DSP_Lib\Source\ControllerFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_cos_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_cos_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_cos_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_sin_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_sin_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_sin_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_sqrt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FastMathFunctions\arm_sqrt_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FastMathFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_opt_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_opt_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_conv_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_opt_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_opt_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_correlate_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q7.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_q15.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\FilteringFunctions\arm_lms_q31.c">
+      <Filter>Source files\DSP_Lib\Source\FilteringFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_add_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_add_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_add_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_inverse_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_fast_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_fast_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_f32.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_q15.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_q31.c">
+      <Filter>Source files\DSP_Lib\Source\MatrixFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_max_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_max_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_max_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_max_q7.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_mean_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_mean_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_mean_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_mean_q7.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_min_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_min_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_min_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_min_q7.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_power_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_power_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_power_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_power_q7.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_rms_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_rms_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_rms_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_std_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_std_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_std_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_var_f32.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_var_q15.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\StatisticsFunctions\arm_var_q31.c">
+      <Filter>Source files\DSP_Lib\Source\StatisticsFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_copy_f32.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_copy_q15.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_copy_q31.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_copy_q7.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_fill_f32.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_fill_q15.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_fill_q31.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_fill_q7.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_float_to_q15.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_float_to_q31.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_float_to_q7.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q15_to_float.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q15_to_q31.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q15_to_q7.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q31_to_float.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q31_to_q15.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q31_to_q7.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q7_to_float.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q7_to_q15.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\SupportFunctions\arm_q7_to_q31.c">
+      <Filter>Source files\DSP_Lib\Source\SupportFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_bitreversal.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_dct4_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_init_f32.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_init_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_init_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_q15.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_q31.c">
+      <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -441,13 +1242,7 @@
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Device\ST\STM32F3xx\Include\system_stm32f3xx.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_common_tables.h">
-      <Filter>Header files\Device-specific files\HAL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_const_structs.h">
-      <Filter>Header files\Device-specific files\HAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\arm_math.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\CMSIS_HAL\Include\core_cm0.h">
@@ -515,6 +1310,12 @@
     </ClInclude>
     <ClInclude Include="stm32f3xx_it.h">
       <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="DSP\DSP_Lib\Include\arm_common_tables.h">
+      <Filter>Header files\Device-specific files\HAL</Filter>
+    </ClInclude>
+    <ClInclude Include="DSP\DSP_Lib\Include\arm_math.h">
+      <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
