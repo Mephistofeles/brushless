@@ -102,9 +102,9 @@ void MC_SixStep_Nucleo_Init()
 	sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
 	sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
 	sClearInputConfig.ClearInputFilter = 0;
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH1);
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH2);
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH3);
+	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH1_PHASE_U);
+	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH2_PHASE_V);
+	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH3_PHASE_W);
 	/***************************************************************************/
 
 	__HAL_FREEZE_TIM1_DBGMCU();  /* Stop TIM during Breakpoint*/
@@ -112,17 +112,17 @@ void MC_SixStep_Nucleo_Init()
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_BREAK); /* Enable the TIM Break interrupt */
 
 	/******************** REGULAR CHANNELS CONFIGURATION *************************/
-	sConfig.Channel = ADC_CH_1; /* Current feedabck */
+	sConfig.Channel = ADC_CURRENT_FEEDBACK_2; /* Current feedabck */
 	sConfig.Rank = 1;
 	sConfig.SingleDiff = ADC_SINGLE_ENDED;
 	sConfig.SamplingTime = ADC_CH_1_ST;
 	sConfig.OffsetNumber = ADC_OFFSET_NONE;
 	sConfig.Offset = 0;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	sConfig.Channel = ADC_CH_3; /* Bus voltage */
+	sConfig.Channel = ADC_VBUS; /* Bus voltage */
 	sConfig.SamplingTime = ADC_CH_3_ST;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	sConfig.Channel = ADC_CH_4; /* Temperature feedback */
+	sConfig.Channel = ADC_TEMP; /* Temperature feedback */
 	sConfig.SamplingTime = ADC_CH_4_ST;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_Bemf_CH1; /* BEMF feedback phase A */
@@ -134,7 +134,7 @@ void MC_SixStep_Nucleo_Init()
 	sConfig.Channel = ADC_Bemf_CH3; /* BEMF feedback phase C */
 	sConfig.SamplingTime = ADC_Bemf_CH3_ST;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	sConfig.Channel = ADC_CH_2; /* Potentiometer */
+	sConfig.Channel = ADC_SPEED_POTENTIOMETER; /* Potentiometer */
 	sConfig.SamplingTime = ADC_CH_2_ST;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	/***************************************************************************/
@@ -151,7 +151,7 @@ void MC_SixStep_Nucleo_Init()
 void START_Ref_Generation()
 {
 	REFx.Instance->CCR1 = 0;
-	HAL_TIM_PWM_Start(&REFx, HF_TIMx_CH1);
+	HAL_TIM_PWM_Start(&REFx, HF_TIMx_CH1_PHASE_U);
 }
 /**
   * @}
@@ -164,7 +164,7 @@ void START_Ref_Generation()
 void STOP_Ref_Generation()
 {
 	REFx.Instance->CCR1 = 0;
-	HAL_TIM_PWM_Stop(&REFx, HF_TIMx_CH1);
+	HAL_TIM_PWM_Stop(&REFx, HF_TIMx_CH1_PHASE_U);
 }
 /**
   * @}

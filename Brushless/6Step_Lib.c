@@ -374,7 +374,7 @@ void MC_SixStep_RESET()
 	HF_TIMx.Instance->PSC =  SIXSTEP_parameters.HF_TIMx_PSC;
 	HF_TIMx.Init.Period =    SIXSTEP_parameters.HF_TIMx_ARR;
 	HF_TIMx.Instance->ARR =  SIXSTEP_parameters.HF_TIMx_ARR;
-	HF_TIMx.Instance->HF_TIMx_CCR1 = SIXSTEP_parameters.HF_TIMx_CCR;
+	HF_TIMx.Instance->HF_TIMx_CCR1_PHASE_U_DUTY = SIXSTEP_parameters.HF_TIMx_CCR;
 
 	SIXSTEP_parameters.NUMPOLESPAIRS = SIXSTEP_parameters.NUMPOLESPAIRS;
 	SIXSTEP_parameters.SYSCLK_frequency = HAL_RCC_GetSysClockFreq();
@@ -386,10 +386,10 @@ void MC_SixStep_RESET()
 	SIXSTEP_parameters.Regular_channel[1] = ADC_Bemf_CH1;   /*BEMF1*/
 	SIXSTEP_parameters.Regular_channel[2] = ADC_Bemf_CH2;   /*BEMF2*/
 	SIXSTEP_parameters.Regular_channel[3] = ADC_Bemf_CH3;   /*BEMF3*/
-	SIXSTEP_parameters.ADC_SEQ_CHANNEL[0] = ADC_CH_1;       /*CURRENT*/
-	SIXSTEP_parameters.ADC_SEQ_CHANNEL[1] = ADC_CH_2;       /*SPEED*/
-	SIXSTEP_parameters.ADC_SEQ_CHANNEL[2] = ADC_CH_3;       /*VBUS*/
-	SIXSTEP_parameters.ADC_SEQ_CHANNEL[3] = ADC_CH_4;       /*TEMP*/
+	SIXSTEP_parameters.ADC_SEQ_CHANNEL[0] = ADC_CURRENT_FEEDBACK_2;       /*CURRENT*/
+	SIXSTEP_parameters.ADC_SEQ_CHANNEL[1] = ADC_SPEED_POTENTIOMETER;       /*SPEED*/
+	SIXSTEP_parameters.ADC_SEQ_CHANNEL[2] = ADC_VBUS;       /*VBUS*/
+	SIXSTEP_parameters.ADC_SEQ_CHANNEL[3] = ADC_TEMP;       /*TEMP*/
 
 	SIXSTEP_parameters.step_position = 0;
 	SIXSTEP_parameters.demagn_counter = 0;
@@ -1079,7 +1079,7 @@ void MC_SixStep_Init_main_data()
 void MC_SixStep_INIT()
 {
 	MC_SixStep_Nucleo_Init();
-	SIXSTEP_parameters.HF_TIMx_CCR  = HF_TIMx.Instance->HF_TIMx_CCR1;
+	SIXSTEP_parameters.HF_TIMx_CCR  = HF_TIMx.Instance->HF_TIMx_CCR1_PHASE_U_DUTY;
 	SIXSTEP_parameters.HF_TIMx_ARR  = HF_TIMx.Instance->ARR;
 	SIXSTEP_parameters.HF_TIMx_PSC  = HF_TIMx.Instance->PSC;
 	SIXSTEP_parameters.LF_TIMx_ARR  = LF_TIMx.Instance->ARR;

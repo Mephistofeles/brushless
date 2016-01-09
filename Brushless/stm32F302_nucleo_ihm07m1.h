@@ -50,19 +50,19 @@
 #define REFx                  htim16 // Reference current PWM
 #define UART                  huart2
 
-#define GPIO_PORT_1           GPIOC
-#define GPIO_CH1              GPIO_PIN_10
-#define GPIO_PORT_2           GPIOC
-#define GPIO_CH2              GPIO_PIN_11
-#define GPIO_PORT_3           GPIOC
-#define GPIO_CH3              GPIO_PIN_12
-#define GPIO_SET              GPIO_PIN_SET
-#define GPIO_RESET            GPIO_PIN_RESET
+#define GPIO_PORT_PHASE_ENABLE           GPIOC
+#define GPIO_CH1_PHASE_U_ENABLE              GPIO_PIN_10
+#define GPIO_CH2_PHASE_U_ENABLE              GPIO_PIN_11
+#define GPIO_CH3_PHASE_U_ENABLE              GPIO_PIN_12
 
-#define ADC_CH_1              ADC_CHANNEL_7    /*CURRENT*/
-#define ADC_CH_2              ADC_CHANNEL_12   /*SPEED*/
-#define ADC_CH_3              ADC_CHANNEL_2    /*VBUS*/
-#define ADC_CH_4              ADC_CHANNEL_8    /*TEMP*/
+#define ADC_CURRENT_FEEDBACK_1              ADC_CHANNEL_1    /*CURRENT 1*/
+#define ADC_CURRENT_FEEDBACK_2              ADC_CHANNEL_7    /*CURRENT 2*/
+#define ADC_CURRENT_FEEDBACK_3              ADC_CHANNEL_6    /*CURRENT 3*/
+
+#define ADC_SPEED_POTENTIOMETER              ADC_CHANNEL_12   /*SPEED*/
+#define ADC_VBUS              ADC_CHANNEL_2    /*VBUS*/
+#define ADC_TEMP              ADC_CHANNEL_8    /*TEMP*/
+
 #define ADC_Bemf_CH1          ADC_CHANNEL_9    /*BEMF1*/
 #define ADC_Bemf_CH2          ADC_CHANNEL_11   /*BEMF2*/
 #define ADC_Bemf_CH3          ADC_CHANNEL_15   /*BEMF3*/
@@ -75,12 +75,12 @@
 #define ADC_Bemf_CH2_ST       ADC_SAMPLETIME_61CYCLES_5  /*BEMF2 sampling time*/
 #define ADC_Bemf_CH3_ST       ADC_SAMPLETIME_61CYCLES_5  /*BEMF3 sampling time*/
 
-#define HF_TIMx_CH1           TIM_CHANNEL_1
-#define HF_TIMx_CH2           TIM_CHANNEL_2
-#define HF_TIMx_CH3           TIM_CHANNEL_3
-#define HF_TIMx_CCR1          CCR1            /*Channel 1*/
-#define HF_TIMx_CCR2          CCR2            /*Channel 2*/
-#define HF_TIMx_CCR3          CCR3            /*Channel 3*/
+#define HF_TIMx_CH1_PHASE_U           TIM_CHANNEL_1
+#define HF_TIMx_CH2_PHASE_V           TIM_CHANNEL_2
+#define HF_TIMx_CH3_PHASE_W           TIM_CHANNEL_3
+#define HF_TIMx_CCR1_PHASE_U_DUTY          CCR1            /*Channel 1*/
+#define HF_TIMx_CCR2_PHASE_V_DUTY          CCR2            /*Channel 2*/
+#define HF_TIMx_CCR3_PHASE_W_DUTY          CCR3            /*Channel 3*/
 
 #define DAC_ENABLE            1               /*!< Enable (1) the DAC peripheral */
 #define DACx                  hdac

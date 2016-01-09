@@ -115,6 +115,7 @@
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_fmc.c" />
     <ClCompile Include="6Step_Lib.c" />
+    <ClCompile Include="field_oriented_control.c" />
     <ClCompile Include="l6230.c" />
     <ClCompile Include="main_F302.c" />
     <ClCompile Include="stm32F302_nucleo_ihm07m1.c" />

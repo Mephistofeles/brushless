@@ -43,6 +43,7 @@
 #include <stdbool.h>
 #include <arm_math.h>
 #include "l6230.h"
+#include "stm32f3xx_nucleo.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -59,6 +60,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 float degree = 0;
+SPI_HandleTypeDef nucleo_Spi;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -145,6 +147,183 @@ void SVPWM_run(float a, float m)
 	L6230_HFTIM_DC_CH3(phase_W_enable_duty_cycle);
 }
 
+static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
+{
+	GPIO_InitTypeDef  GPIO_InitStruct;
+
+	  /*** Configure the GPIOs ***/
+	  /* Enable GPIO clock */
+	NUCLEO_SPIx_SCK_GPIO_CLK_ENABLE();
+	NUCLEO_SPIx_MISO_MOSI_GPIO_CLK_ENABLE();
+
+	  /* Configure SPI SCK */
+	GPIO_InitStruct.Pin = NUCLEO_SPIx_SCK_PIN;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull  = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+	GPIO_InitStruct.Alternate = NUCLEO_SPIx_SCK_AF;
+	HAL_GPIO_Init(NUCLEO_SPIx_SCK_GPIO_PORT, &GPIO_InitStruct);
+
+	  /* Configure SPI MISO and MOSI */
+	GPIO_InitStruct.Pin = NUCLEO_SPIx_MOSI_PIN;
+	GPIO_InitStruct.Alternate = NUCLEO_SPIx_MISO_MOSI_AF;
+	GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
+	HAL_GPIO_Init(NUCLEO_SPIx_MISO_MOSI_GPIO_PORT, &GPIO_InitStruct);
+
+	GPIO_InitStruct.Pin = NUCLEO_SPIx_MISO_PIN;
+	HAL_GPIO_Init(NUCLEO_SPIx_MISO_MOSI_GPIO_PORT, &GPIO_InitStruct);
+
+	  /*** Configure the SPI peripheral ***/
+	  /* Enable SPI clock */
+	NUCLEO_SPIx_CLK_ENABLE();
+}
+
+static void SPI_Init(void)
+{
+	GPIO_InitTypeDef  GPIO_InitStruct;
+
+	// Chip Select
+	GPIO_InitStruct.Pin = GPIO_PIN_8;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+	
+	if (HAL_SPI_GetState(&nucleo_Spi) == HAL_SPI_STATE_RESET)
+	{
+	  /* SPI Config */
+		nucleo_Spi.Instance = NUCLEO_SPIx;
+		  /* SPI baudrate is set to 8 MHz maximum (PCLKx/SPI_BaudRatePrescaler = 32/4 = 8 MHz)
+		   to verify these constraints:
+			  - ST7735 LCD SPI interface max baudrate is 15MHz for write and 6.66MHz for read
+				Since the provided driver doesn't use read capability from LCD, only constraint
+				on write baudrate is considered.
+			  - SD card SPI interface max baudrate is 25MHz for write/read
+			  - PCLK1 max frequency is 32 MHz
+			  - PCLK2 max frequency is 64 MHz
+		   */
+		nucleo_Spi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+		nucleo_Spi.Init.Direction = SPI_DIRECTION_2LINES;
+		nucleo_Spi.Init.CLKPhase = SPI_PHASE_2EDGE;
+		nucleo_Spi.Init.CLKPolarity = SPI_POLARITY_LOW;
+		nucleo_Spi.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLED;
+		nucleo_Spi.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+		nucleo_Spi.Init.CRCPolynomial = 7;
+		nucleo_Spi.Init.DataSize = SPI_DATASIZE_16BIT;
+		nucleo_Spi.Init.FirstBit = SPI_FIRSTBIT_MSB;
+		nucleo_Spi.Init.NSS = SPI_NSS_SOFT;
+		nucleo_Spi.Init.TIMode = SPI_TIMODE_DISABLED;
+		nucleo_Spi.Init.NSSPMode = SPI_NSS_PULSE_DISABLED;
+		nucleo_Spi.Init.Mode = SPI_MODE_MASTER;
+
+		SPIx_MspInit(&nucleo_Spi);
+		HAL_SPI_Init(&nucleo_Spi);
+	}
+}
+
+
+uint8_t parity(uint16_t frame)
+{
+	uint8_t t = (uint8_t)frame ^ frame >> 8;
+	t ^= t >> 4;
+	t ^= t >> 2;
+	t ^= t >> 1;
+	return t & 1;
+}
+ 
+void TIM2_IRQHandler(void)
+{
+	HAL_TIM_IRQHandler(&htim2);
+}
+
+void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef *htim) {
+	GPIO_InitTypeDef GPIO_InitStruct;
+ 
+	if (htim->Instance == TIM2) {
+ 
+		__TIM2_CLK_ENABLE();
+ 
+		__GPIOB_CLK_ENABLE();
+ 
+		//GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5;
+		//GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+		//GPIO_InitStruct.Pull = GPIO_PULLUP;
+		//GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+		//GPIO_InitStruct.Alternate = GPIO_AF2_TIM2;
+		//HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+		
+		GPIO_InitTypeDef GPIO_InitStructureA;
+		GPIO_InitStructureA.Pin = GPIO_PIN_15;
+		GPIO_InitStructureA.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStructureA.Pull = GPIO_NOPULL;	
+		GPIO_InitStructureA.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructureA.Alternate = GPIO_AF1_TIM2;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+	
+		GPIO_InitTypeDef GPIO_InitStructureB;
+		GPIO_InitStructureB.Pin = GPIO_PIN_10;
+		GPIO_InitStructureB.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStructureB.Pull = GPIO_NOPULL;
+		GPIO_InitStructureB.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructureB.Alternate = GPIO_AF1_TIM2;
+		HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+ 
+		HAL_NVIC_SetPriority(TIM2_IRQn, 0, 1);
+ 
+		HAL_NVIC_EnableIRQ(TIM2_IRQn);
+	}
+}
+
+void configureEncoder()
+{	
+	//GPIO_InitTypeDef GPIO_InitStructureA;
+	//GPIO_InitStructureA.Pin = GPIO_PIN_15;
+	//GPIO_InitStructureA.Mode = GPIO_MODE_AF_PP;
+	//GPIO_InitStructureA.Pull = GPIO_NOPULL;	
+	//GPIO_InitStructureA.Speed = GPIO_SPEED_HIGH;
+	//GPIO_InitStructureA.Alternate = GPIO_AF2_TIM2;
+	//HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+	//
+	//GPIO_InitTypeDef GPIO_InitStructureB;
+	//GPIO_InitStructureB.Pin = GPIO_PIN_10;
+	//GPIO_InitStructureB.Mode = GPIO_MODE_AF_PP;
+	//GPIO_InitStructureB.Pull = GPIO_NOPULL;
+	//GPIO_InitStructureB.Speed = GPIO_SPEED_HIGH;
+	//GPIO_InitStructureB.Alternate = GPIO_AF1_TIM2;
+	//HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+	
+	HAL_TIM_Encoder_MspInit(&htim2);
+	
+	htim2.Instance = TIM2;
+	htim2.Init.Prescaler = 0;
+	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim2.Init.Period = 0;
+	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	HAL_TIM_Base_Init(&htim2);
+	
+	TIM_Encoder_InitTypeDef sConfig;
+	sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
+	sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+	sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+	sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+	sConfig.IC1Filter = 0;
+	sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+	sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+	sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+	sConfig.IC2Filter = 0;
+	HAL_TIM_Encoder_Init(&htim2, &sConfig);
+		
+	TIM_MasterConfigTypeDef sMasterConfig;
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig);
+		
+	HAL_TIM_Encoder_Start_IT(&htim2, TIM_CHANNEL_1);
+	
+	TIM2->EGR = 1;           // Generate an update event
+	TIM2->CR1 = 1;           // Enable the counter
+}
+
 int main(void)
 {
   /* MCU Configuration----------------------------------------------------------*/
@@ -170,7 +349,7 @@ int main(void)
 				###### This function initializes 6-Step lib ######
 	  ==============================================================================
 	  **************************************************************************** */
-	MC_SixStep_INIT();
+	//MC_SixStep_INIT();
 	/****************************************************************************/
 	/* USER CODE END 2 */
 
@@ -189,42 +368,70 @@ int main(void)
 	  "comm" mode enables the communication protocol with external PC terminal and the
 	  "boot" mode enables the FW for external boot loader.
 
-	     A list of APIs is provided to send command to 6Step lib, for instance:
+		 A list of APIs is provided to send command to 6Step lib, for instance:
 
-	     	(#)  MC_StartMotor() -> Start the motor
+			(#)  MC_StartMotor() -> Start the motor
 
-	     		(#)  MC_StoptMotor() -> Stop the motor
+				(#)  MC_StoptMotor() -> Stop the motor
 
-	     			(#)  MC_Set_Speed(...) -> Set the new motor speed
+					(#)  MC_Set_Speed(...) -> Set the new motor speed
 
-	     			  The MC_SixStep_param.h contains the full list of MC parameters
-	     			  ****************************************************************************/
+					  The MC_SixStep_param.h contains the full list of MC parameters
+					  ****************************************************************************/
 
-	     			  	/* Infinite loop */
+						/* Infinite loop */
 	
 	
 	
-	L6230_Start_PWM_generation();
-	//MC_SixStep_Start_PWM_driving();
-	MC_SixStep_Current_Reference_Start();
-	MC_SixStep_Current_Reference_Setvalue(2000);
+	//L6230_Start_PWM_generation();
+	////MC_SixStep_Start_PWM_driving();
+	//MC_SixStep_Current_Reference_Start();
+	//MC_SixStep_Current_Reference_Setvalue(2000);
 
+	//
+	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);
+	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);
+	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);
+	//
+
+	//while (1)
+	//{
+		//if (degree >= 360) {
+			//degree = 0;
+		//}
+		//else {
+			//degree +=  1;
+		//}
+
+		//SVPWM_run(degree, 1);
+	//}
 	
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);
-	HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);
-    
-
+	//SPI_Init();
+	//while (1)
+	//{		
+		//HAL_StatusTypeDef status = HAL_OK;
+		//
+		//uint16_t address = 0x3FFE;
+			//
+		//unsigned short frame = address | (1 << 14);
+//
+		//frame |= (parity(frame) << 15);			
+			//
+		//uint16_t readvalue = 0;
+//
+		//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_RESET);
+		//status = HAL_SPI_TransmitReceive(&nucleo_Spi, (uint8_t*) &frame, (uint8_t*) &readvalue, 1, NUCLEO_SPIx_TIMEOUT_MAX);
+		//
+		//uint16_t angle = readvalue  & 0x3FFF;
+		//
+		//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
+	//}
+	
+	configureEncoder();
 	while (1)
 	{
-		if (degree >= 360) {
-			degree = 0;
-		}
-		else {
-			degree +=  1;
-		}
-
-		SVPWM_run(degree, 1);
+		uint32_t enc = TIM2->CNT;
+		HAL_Delay(1500);
 	}
 }
 
@@ -346,7 +553,7 @@ void MX_TIM1_Init(void)
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_ENABLE;
 	HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig);
 
-	TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig;
+	TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig; // Disable PWM when DIAG/EN is pulled low by the H-bridge (overcurrent protection)
 	sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
 	sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
 	sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;

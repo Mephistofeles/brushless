@@ -1024,6 +1024,9 @@
     <ClCompile Include="DSP\DSP_Lib\Source\TransformFunctions\arm_rfft_q31.c">
       <Filter>Source files\DSP_Lib\Source\TransformFunctions</Filter>
     </ClCompile>
+    <ClCompile Include="field_oriented_control.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="X-NUCLEO-IHM07M1.h">
