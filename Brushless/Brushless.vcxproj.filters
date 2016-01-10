@@ -1030,6 +1030,9 @@
     <ClCompile Include="encoder.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="svm.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="X-NUCLEO-IHM07M1.h">
@@ -1325,6 +1328,9 @@
     </ClInclude>
     <ClInclude Include="MC_SixStep_param.h">
       <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="svm.h">
+      <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

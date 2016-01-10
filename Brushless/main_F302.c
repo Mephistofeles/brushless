@@ -45,6 +45,7 @@
 #include "l6230.h"
 #include "stm32f3xx_nucleo.h"
 #include "encoder.h"
+#include "svm.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -84,122 +85,6 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
-
-void SVPWM_run(float a, float m)
-{
-	float Ualpha, Ubeta;
-	float X, Y, Z;
-	float PWMa, PWMb, PWMc;
-	uint8_t sector;
-
-	//Ualpha = m * cos(a);
-	//Ubeta = m * sin(a);
-	
-	float angle = a;
-	if (angle >= 180.0f) angle -= 360.0f;
-		
-	arm_sin_cos_f32(angle, &Ubeta, &Ualpha);
-
-	X = Ubeta;
-	Y = Ubeta * 0.5f + Ualpha * 0.8660254f; //(Ubeta + Ualpha*sqrt(3))/2
-	Z = X - Y;				//(Ubeta - Ualpha*sqrt(3))/2
-
-	if (a < 60) sector = 0;
-	else if (a < 120) sector = 1;
-	else if (a < 180) sector = 2;
-	else if (a < 240) sector = 3;
-	else if (a < 300) sector = 4;
-	else sector = 5;
-
-	//switch (sector) {
-	//case 0:
-	//case 3:
-		//PWMa = Y;
-		//PWMb = X + Z;
-		//PWMc = -Y;
-		//break;
-	//case 1:
-	//case 4:
-		//PWMa = Y - Z;
-		//PWMb = X;
-		//PWMc = -X;
-		//break;
-	//case 2:
-	//case 5:
-		//PWMa = -Z;
-		//PWMb = Z;
-		//PWMc = -(Y + X);
-		//break;
-	//default:
-		//break;
-	//}
-	
-	uint8_t restricted_angle = (uint16_t)a % 60;
-	
-	float restricted_cos = arm_cos_f32((restricted_angle + 30) * 0.0174532925f);
-	float restricted_sin = arm_sin_f32((restricted_angle) * 0.0174532925f);
-	
-	float t1 = 0.8660254f * m * restricted_cos;
-	float t2 = 0.8660254f * m * restricted_sin;
-	float t0 = 1 - t1 - t2;
-	
-	uint16_t phase_U_enable_duty_cycle = 0;
-	uint16_t phase_V_enable_duty_cycle = 0;
-	uint16_t phase_W_enable_duty_cycle = 0;
-	
-	
-	
-	switch (sector) {
-	case 0:
-		phase_U_enable_duty_cycle = (t1 + t2) * 719;
-		phase_V_enable_duty_cycle = t2 * 719;
-		phase_W_enable_duty_cycle = 0;
-		break;
-	case 1:
-		phase_U_enable_duty_cycle = t1 * 719;
-		phase_V_enable_duty_cycle = (t1 + t2) * 719;
-		phase_W_enable_duty_cycle = 0;
-		break;
-	case 2:
-		phase_U_enable_duty_cycle = 0;
-		phase_V_enable_duty_cycle = (t1 + t2) * 719;
-		phase_W_enable_duty_cycle = t2 * 719;
-		break;
-	case 3:
-		phase_U_enable_duty_cycle = 0;
-		phase_V_enable_duty_cycle = t1 * 719;
-		phase_W_enable_duty_cycle = (t1 + t2) * 719;
-		break;
-	case 4:
-		phase_U_enable_duty_cycle = t2 * 719;
-		phase_V_enable_duty_cycle = 0;
-		phase_W_enable_duty_cycle = (t1 + t2) * 719;
-		break;
-	case 5:
-		phase_U_enable_duty_cycle = (t1 + t2) * 719;
-		phase_V_enable_duty_cycle = 0;
-		phase_W_enable_duty_cycle = t1 * 719;
-		break;
-	default:
-		break;
-	}
-	
-	//arm_inv_clarke_f32(Ualpha, Ubeta, &PWMa, &PWMb);
-	//
-	//PWMc =  -0.5 * Ualpha - (float32_t) 0.8660254039 * Ubeta;
-	
-	//uint16_t phase_U_enable_duty_cycle = 350 + PWMa * 300;
-	//uint16_t phase_V_enable_duty_cycle = 350 + PWMb * 300;
-	//uint16_t phase_W_enable_duty_cycle = 350 + PWMc * 300;
-	
-	uint8_t phase_U_direction = PWMa > 0;
-	uint8_t phase_V_direction = PWMb > 0;
-	uint8_t phase_W_direction = PWMc > 0;	
-	
-	L6230_HFTIM_DC_CH1(phase_U_enable_duty_cycle);
-	L6230_HFTIM_DC_CH2(phase_V_enable_duty_cycle);
-	L6230_HFTIM_DC_CH3(phase_W_enable_duty_cycle);
-}
 
 static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
 {
@@ -356,22 +241,10 @@ int main(void)
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH2_PHASE_V_ENABLE, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
 	
-
-	//arm_pid_instance_f32 pid;
-	//pid.Kp = 0.005f;
-	//pid.Ki = 0;
-	//pid.Kd = 0;
-	//arm_pid_init_f32(&pid, 1);
-	
 	float speed = 0.001f;
 	HAL_Delay(300);
 	while (1)
 	{
-		//float ref = arm_pid_f32(&pid, 30 - get_speed());
-		//
-		//if (ref > 0.0001f) ref = 0.0001f;
-		//
-		//
 		if (degree >= 360)
 		{
 			degree -= 360;	
@@ -386,9 +259,7 @@ int main(void)
 		}
 			
 		if (speed > 20.0f) speed = 20.0f;
-//speed += ref;
-//if (get_speed() < 10 && speed > 0.2f) speed = 0.2f;
-//if (get_speed() > 10 && speed > 0.4f) speed = 0.4f;
+		
 		degree += speed;//0.058474768f; 20 rev / 15 sec
 
 		SVPWM_run(degree, 1);
@@ -590,15 +461,8 @@ void MX_TIM2_Init()
 	encoder.IC2Prescaler = TIM_ICPSC_DIV1;
 	encoder.IC2Selection = TIM_ICSELECTION_DIRECTTI;
 	
-	if (HAL_TIM_Encoder_Init(&htim2, &encoder) != HAL_OK)
-	{
-		//Error_Handler();
-	}
-	
-	if (HAL_TIM_Encoder_Start_IT(&htim2, TIM_CHANNEL_1) != HAL_OK)
-	{
-		//Error_Handler();
-	}
+	HAL_TIM_Encoder_Init(&htim2, &encoder);	
+	HAL_TIM_Encoder_Start_IT(&htim2, TIM_CHANNEL_1);
 	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.Pin = GPIO_PIN_10;

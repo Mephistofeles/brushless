@@ -126,6 +126,10 @@
     <ClCompile Include="stm32f3xx_hal_msp.c" />
     <ClCompile Include="stm32f3xx_it.c" />
     <ClCompile Include="stm32f3xx_nucleo.c" />
+    <ClCompile Include="svm.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="system_stm32f3xx.c" />
     <ClCompile Include="UART_UI.c" />
     <ClCompile Include="X-NUCLEO-IHM07M1.c" />
@@ -483,6 +487,7 @@
     <ClInclude Include="stm32f3xx_hal_conf.h" />
     <ClInclude Include="stm32f3xx_it.h" />
     <ClInclude Include="stm32f3xx_nucleo.h" />
+    <ClInclude Include="svm.h" />
     <ClInclude Include="UART_UI.h" />
     <ClInclude Include="X-NUCLEO-IHM07M1.h" />
   </ItemGroup>
