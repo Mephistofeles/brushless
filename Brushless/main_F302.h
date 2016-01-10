@@ -41,5 +41,6 @@ extern DAC_HandleTypeDef hdac;
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart2;

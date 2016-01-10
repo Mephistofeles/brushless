@@ -44,6 +44,7 @@
 #include <arm_math.h>
 #include "l6230.h"
 #include "stm32f3xx_nucleo.h"
+#include "encoder.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -54,6 +55,7 @@ DAC_HandleTypeDef hdac;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim15;
 TIM_HandleTypeDef htim16;
 
 UART_HandleTypeDef huart2;
@@ -71,6 +73,7 @@ static void MX_DAC_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM6_Init(void);
+static void MX_TIM15_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_USART2_UART_Init(void);
 
@@ -299,6 +302,7 @@ int main(void)
 	MX_TIM1_Init(); // 3-phase PWM
 	MX_TIM2_Init(); // Encoder
 	MX_TIM6_Init(); // Reference current PWM
+	MX_TIM15_Init();
 	MX_TIM16_Init(); // Low frequency task
 	MX_USART2_UART_Init();
 
@@ -353,19 +357,39 @@ int main(void)
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
 	
 
-	float amount = 0.001;
+	//arm_pid_instance_f32 pid;
+	//pid.Kp = 0.005f;
+	//pid.Ki = 0;
+	//pid.Kd = 0;
+	//arm_pid_init_f32(&pid, 1);
+	
+	float speed = 0.001f;
+	HAL_Delay(300);
 	while (1)
 	{
+		//float ref = arm_pid_f32(&pid, 30 - get_speed());
+		//
+		//if (ref > 0.0001f) ref = 0.0001f;
+		//
+		//
 		if (degree >= 360)
 		{
-			degree -= 360;
+			degree -= 360;	
+		}
+		if (speed < 4.0f)
+		{
+			speed *= 1.000005f;
 		}
 		else
 		{
-			amount *= 1.00001f;
-			if (amount > 5.0f) amount = 5.0f;
-			degree +=  amount;
+			speed *= 1.000005f;        
 		}
+			
+		if (speed > 20.0f) speed = 20.0f;
+//speed += ref;
+//if (get_speed() < 10 && speed > 0.2f) speed = 0.2f;
+//if (get_speed() > 10 && speed > 0.4f) speed = 0.4f;
+		degree += speed;
 
 		SVPWM_run(degree, 1);
 	}
@@ -418,10 +442,11 @@ void SystemClock_Config(void)
 	HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
 
 	RCC_PeriphCLKInitTypeDef PeriphClkInit;
-	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2 | RCC_PERIPHCLK_TIM1
+	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2 | RCC_PERIPHCLK_TIM1 | RCC_PERIPHCLK_TIM15
 								| RCC_PERIPHCLK_TIM16 | RCC_PERIPHCLK_ADC1;
 	PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
 	PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLK_HCLK;
+	PeriphClkInit.Tim15ClockSelection = RCC_TIM15CLK_HCLK;
 	PeriphClkInit.Tim16ClockSelection = RCC_TIM16CLK_HCLK;
 	PeriphClkInit.Adc1ClockSelection = RCC_ADC1PLLCLK_DIV1;
 	HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit);
@@ -600,6 +625,17 @@ void MX_TIM6_Init(void)
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 	HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig);
 
+}
+
+void MX_TIM15_Init(void)
+{
+	htim15.Instance = TIM15;
+	htim15.Init.Period = 20000;
+	htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim15.Init.Prescaler = 1999;
+	htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
+	HAL_TIM_Base_Init(&htim15);
+	HAL_TIM_Base_Start(&htim15);
 }
 
 /* TIM16 init function */
