@@ -115,6 +115,10 @@
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_wwdg.c" />
     <ClCompile Include="..\..\..\Users\pawel\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32F3xxxx\STM32F3xx_HAL_Driver\Src\stm32f3xx_ll_fmc.c" />
     <ClCompile Include="6Step_Lib.c" />
+    <ClCompile Include="encoder.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="field_oriented_control.c" />
     <ClCompile Include="l6230.c" />
     <ClCompile Include="main_F302.c" />
@@ -472,6 +476,7 @@
     <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h" />
     <ClInclude Include="6Step_Lib.h" />
     <ClInclude Include="arm_common_tables.h" />
+    <ClInclude Include="encoder.h" />
     <ClInclude Include="l6230.h" />
     <ClInclude Include="main_F302.h" />
     <ClInclude Include="stm32F302_nucleo_ihm07m1.h" />

@@ -69,6 +69,7 @@ static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_DAC_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM2_Init(void);
 static void MX_TIM6_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_USART2_UART_Init(void);
@@ -133,6 +134,10 @@ void SVPWM_run(float a, float m)
 	default:
 		break;
 	}
+	
+	//arm_inv_clarke_f32(Ualpha, Ubeta, &PWMa, &PWMb);
+	//
+	//PWMc =  -0.5 * Ualpha - (float32_t) 0.8660254039 * Ubeta;
 	
 	uint16_t phase_U_enable_duty_cycle = 350 + PWMa * 300;
 	uint16_t phase_V_enable_duty_cycle = 350 + PWMb * 300;
@@ -230,99 +235,6 @@ uint8_t parity(uint16_t frame)
 	t ^= t >> 1;
 	return t & 1;
 }
- 
-void TIM2_IRQHandler(void)
-{
-	HAL_TIM_IRQHandler(&htim2);
-}
-
-void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef *htim) {
-	GPIO_InitTypeDef GPIO_InitStruct;
- 
-	if (htim->Instance == TIM2) {
- 
-		__TIM2_CLK_ENABLE();
- 
-		__GPIOB_CLK_ENABLE();
- 
-		//GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5;
-		//GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-		//GPIO_InitStruct.Pull = GPIO_PULLUP;
-		//GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-		//GPIO_InitStruct.Alternate = GPIO_AF2_TIM2;
-		//HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-		
-		GPIO_InitTypeDef GPIO_InitStructureA;
-		GPIO_InitStructureA.Pin = GPIO_PIN_15;
-		GPIO_InitStructureA.Mode = GPIO_MODE_AF_PP;
-		GPIO_InitStructureA.Pull = GPIO_NOPULL;	
-		GPIO_InitStructureA.Speed = GPIO_SPEED_HIGH;
-		GPIO_InitStructureA.Alternate = GPIO_AF1_TIM2;
-		HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
-	
-		GPIO_InitTypeDef GPIO_InitStructureB;
-		GPIO_InitStructureB.Pin = GPIO_PIN_10;
-		GPIO_InitStructureB.Mode = GPIO_MODE_AF_PP;
-		GPIO_InitStructureB.Pull = GPIO_NOPULL;
-		GPIO_InitStructureB.Speed = GPIO_SPEED_HIGH;
-		GPIO_InitStructureB.Alternate = GPIO_AF1_TIM2;
-		HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
- 
-		HAL_NVIC_SetPriority(TIM2_IRQn, 0, 1);
- 
-		HAL_NVIC_EnableIRQ(TIM2_IRQn);
-	}
-}
-
-void configureEncoder()
-{	
-	//GPIO_InitTypeDef GPIO_InitStructureA;
-	//GPIO_InitStructureA.Pin = GPIO_PIN_15;
-	//GPIO_InitStructureA.Mode = GPIO_MODE_AF_PP;
-	//GPIO_InitStructureA.Pull = GPIO_NOPULL;	
-	//GPIO_InitStructureA.Speed = GPIO_SPEED_HIGH;
-	//GPIO_InitStructureA.Alternate = GPIO_AF2_TIM2;
-	//HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
-	//
-	//GPIO_InitTypeDef GPIO_InitStructureB;
-	//GPIO_InitStructureB.Pin = GPIO_PIN_10;
-	//GPIO_InitStructureB.Mode = GPIO_MODE_AF_PP;
-	//GPIO_InitStructureB.Pull = GPIO_NOPULL;
-	//GPIO_InitStructureB.Speed = GPIO_SPEED_HIGH;
-	//GPIO_InitStructureB.Alternate = GPIO_AF1_TIM2;
-	//HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
-	
-	HAL_TIM_Encoder_MspInit(&htim2);
-	
-	htim2.Instance = TIM2;
-	htim2.Init.Prescaler = 0;
-	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim2.Init.Period = 0;
-	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	HAL_TIM_Base_Init(&htim2);
-	
-	TIM_Encoder_InitTypeDef sConfig;
-	sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
-	sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
-	sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
-	sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
-	sConfig.IC1Filter = 0;
-	sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
-	sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
-	sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
-	sConfig.IC2Filter = 0;
-	HAL_TIM_Encoder_Init(&htim2, &sConfig);
-		
-	TIM_MasterConfigTypeDef sMasterConfig;
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig);
-		
-	HAL_TIM_Encoder_Start_IT(&htim2, TIM_CHANNEL_1);
-	
-	TIM2->EGR = 1;           // Generate an update event
-	TIM2->CR1 = 1;           // Enable the counter
-}
 
 int main(void)
 {
@@ -338,9 +250,10 @@ int main(void)
 	MX_GPIO_Init();
 	MX_ADC1_Init();
 	MX_DAC_Init();
-	MX_TIM1_Init();
-	MX_TIM6_Init();
-	MX_TIM16_Init();
+	MX_TIM1_Init(); // 3-phase PWM
+	MX_TIM2_Init(); // Encoder
+	MX_TIM6_Init(); // Reference current PWM
+	MX_TIM16_Init(); // Low frequency task
 	MX_USART2_UART_Init();
 
 	  /* USER CODE BEGIN 2 */
@@ -349,7 +262,7 @@ int main(void)
 				###### This function initializes 6-Step lib ######
 	  ==============================================================================
 	  **************************************************************************** */
-	//MC_SixStep_INIT();
+	MC_SixStep_INIT();
 	/****************************************************************************/
 	/* USER CODE END 2 */
 
@@ -383,28 +296,30 @@ int main(void)
 	
 	
 	
-	//L6230_Start_PWM_generation();
-	////MC_SixStep_Start_PWM_driving();
-	//MC_SixStep_Current_Reference_Start();
-	//MC_SixStep_Current_Reference_Setvalue(2000);
+	L6230_Start_PWM_generation();
+	//MC_SixStep_Start_PWM_driving();
+	MC_SixStep_Current_Reference_Start();
+	MC_SixStep_Current_Reference_Setvalue(2000);
 
-	//
-	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH1, GPIO_SET);
-	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH2, GPIO_SET);
-	//HAL_GPIO_WritePin(GPIO_PORT_1, GPIO_CH3, GPIO_SET);
-	//
+	
+	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH1_PHASE_U_ENABLE, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH2_PHASE_V_ENABLE, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
+	
 
-	//while (1)
-	//{
-		//if (degree >= 360) {
-			//degree = 0;
-		//}
-		//else {
-			//degree +=  1;
-		//}
+	while (1)
+	{
+		if (degree >= 360)
+		{
+			degree = 0;
+		}
+		else
+		{
+			degree +=  0.001f;
+		}
 
-		//SVPWM_run(degree, 1);
-	//}
+		SVPWM_run(degree, 1);
+	}
 	
 	//SPI_Init();
 	//while (1)
@@ -427,11 +342,8 @@ int main(void)
 		//HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
 	//}
 	
-	configureEncoder();
 	while (1)
 	{
-		uint32_t enc = TIM2->CNT;
-		HAL_Delay(1500);
 	}
 }
 
@@ -583,6 +495,48 @@ void MX_TIM1_Init(void)
 
 }
 
+void MX_TIM2_Init()
+{			
+	htim2.Instance = TIM2;
+	htim2.Init.Period = 4095;
+	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim2.Init.Prescaler = 0;
+	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 
+	TIM_Encoder_InitTypeDef encoder;
+	encoder.EncoderMode = TIM_ENCODERMODE_TI12;
+ 
+	encoder.IC1Filter = 0x0;
+	encoder.IC1Polarity = TIM_INPUTCHANNELPOLARITY_RISING;
+	encoder.IC1Prescaler = TIM_ICPSC_DIV1;
+	encoder.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+ 
+	encoder.IC2Filter = 0x0;
+	encoder.IC2Polarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+	encoder.IC2Prescaler = TIM_ICPSC_DIV1;
+	encoder.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+	
+	if (HAL_TIM_Encoder_Init(&htim2, &encoder) != HAL_OK)
+	{
+		//Error_Handler();
+	}
+	
+	if (HAL_TIM_Encoder_Start_IT(&htim2, TIM_CHANNEL_1) != HAL_OK)
+	{
+		//Error_Handler();
+	}
+	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.Pin = GPIO_PIN_10;
+	GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;
+	GPIO_InitStructure.Pull = GPIO_NOPULL;	
+	GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+	
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);	
+}
+
 /* TIM6 init function */
 void MX_TIM6_Init(void)
 {
@@ -669,10 +623,10 @@ void MX_GPIO_Init(void)
 	__GPIOB_CLK_ENABLE();
 
 	  /*Configure GPIO pin : PC13 */
-	GPIO_InitStruct.Pin = GPIO_PIN_13;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+	//GPIO_InitStruct.Pin = GPIO_PIN_13;
+	//GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+	//GPIO_InitStruct.Pull = GPIO_PULLUP;
+	//HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 	  /*Configure GPIO pin : PC4 */
 	GPIO_InitStruct.Pin = GPIO_PIN_4;
@@ -703,8 +657,8 @@ void MX_GPIO_Init(void)
 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 	  /* EXTI interrupt init*/
-	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+	//HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+	//HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 
 }

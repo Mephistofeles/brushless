@@ -263,19 +263,20 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     PB10     ------> TIM2_CH3
     PB3     ------> TIM2_CH2
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_5;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_3;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	  // Hall sensors
+    //GPIO_InitStruct.Pin = GPIO_PIN_5;
+    //GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    //GPIO_InitStruct.Pull = GPIO_NOPULL;
+    //GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    //GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
+    //HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+//
+    //GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_3;
+    //GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+    //GPIO_InitStruct.Pull = GPIO_NOPULL;
+    //GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
+    //GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
+    //HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM2_MspInit 1 */
 
@@ -478,7 +479,32 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 }
 
 /* USER CODE BEGIN 1 */
-
+void HAL_TIM_Encoder_MspInit(TIM_HandleTypeDef *htim)
+{ 
+	if (htim->Instance == TIM2)
+	{ 
+		__TIM2_CLK_ENABLE();
+ 
+		__GPIOA_CLK_ENABLE();
+		__GPIOB_CLK_ENABLE();
+		
+		GPIO_InitTypeDef GPIO_InitStructureA;
+		GPIO_InitStructureA.Pin = GPIO_PIN_15;
+		GPIO_InitStructureA.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStructureA.Pull = GPIO_NOPULL;	
+		GPIO_InitStructureA.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructureA.Alternate = GPIO_AF1_TIM2;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStructureA);
+	
+		GPIO_InitTypeDef GPIO_InitStructureB;
+		GPIO_InitStructureB.Pin = GPIO_PIN_3;
+		GPIO_InitStructureB.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStructureB.Pull = GPIO_NOPULL;
+		GPIO_InitStructureB.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructureB.Alternate = GPIO_AF1_TIM2;
+		HAL_GPIO_Init(GPIOB, &GPIO_InitStructureB);
+	}
+}
 /* USER CODE END 1 */
 
 /**

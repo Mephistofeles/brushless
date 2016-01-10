@@ -52,8 +52,8 @@
 
 #define GPIO_PORT_PHASE_ENABLE           GPIOC
 #define GPIO_CH1_PHASE_U_ENABLE              GPIO_PIN_10
-#define GPIO_CH2_PHASE_U_ENABLE              GPIO_PIN_11
-#define GPIO_CH3_PHASE_U_ENABLE              GPIO_PIN_12
+#define GPIO_CH2_PHASE_V_ENABLE              GPIO_PIN_11
+#define GPIO_CH3_PHASE_W_ENABLE              GPIO_PIN_12
 
 #define ADC_CURRENT_FEEDBACK_1              ADC_CHANNEL_1    /*CURRENT 1*/
 #define ADC_CURRENT_FEEDBACK_2              ADC_CHANNEL_7    /*CURRENT 2*/

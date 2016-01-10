@@ -1027,6 +1027,9 @@
     <ClCompile Include="field_oriented_control.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="encoder.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="X-NUCLEO-IHM07M1.h">
@@ -1318,6 +1321,9 @@
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
     <ClInclude Include="arm_common_tables.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="encoder.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

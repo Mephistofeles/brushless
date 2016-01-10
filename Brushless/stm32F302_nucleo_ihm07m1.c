@@ -41,6 +41,7 @@
 #include "6Step_Lib.h"
 #include <MC_Common.h>
 #include <stm32f3xx_hal.h>
+#include "encoder.h"
 
 extern SIXSTEP_Base_InitTypeDef SIXSTEP_parameters; /*!< Main SixStep structure*/
 extern SIXSTEP_PI_PARAM_InitTypeDef_t PI_parameters; /*!< SixStep PI regulator structure*/
@@ -255,9 +256,18 @@ void HAL_SYSTICK_Callback()
   *  @{
 	* @brief EXT callback
 */
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	MC_EXT_button_SixStep();
+	if (GPIO_Pin == GPIO_PIN_13)
+	{
+		
+		MC_EXT_button_SixStep();
+	}
+	else if (GPIO_Pin == GPIO_PIN_10)
+	{
+		reset_encoder();
+	}
 }
 /**
   * @}
