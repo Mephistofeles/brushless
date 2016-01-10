@@ -44,3 +44,5 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart2;
+
+void HAL_TIMEx_BreakCallback(TIM_HandleTypeDef *htim);

@@ -118,13 +118,18 @@ void USART2_IRQHandler(void)
 void TIM1_BRK_TIM15_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
-  if(__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_BREAK) != RESET)
-  {
-    MC_StopMotor();
-    SIXSTEP_parameters.STATUS = OVERCURRENT;
-  }
+	if (__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_BREAK) != RESET)
+	{
+		MC_StopMotor();
+		SIXSTEP_parameters.STATUS = OVERCURRENT;
+		HAL_TIM_IRQHandler(&htim1);
+	}
+	else
+	{
+		HAL_TIM_IRQHandler(&htim15);
+	}
   /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim1);
+  
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
 
   /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */

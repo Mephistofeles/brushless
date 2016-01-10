@@ -389,7 +389,7 @@ int main(void)
 //speed += ref;
 //if (get_speed() < 10 && speed > 0.2f) speed = 0.2f;
 //if (get_speed() > 10 && speed > 0.4f) speed = 0.4f;
-		degree += speed;
+		degree += speed;//0.058474768f; 20 rev / 15 sec
 
 		SVPWM_run(degree, 1);
 	}
@@ -630,12 +630,12 @@ void MX_TIM6_Init(void)
 void MX_TIM15_Init(void)
 {
 	htim15.Instance = TIM15;
-	htim15.Init.Period = 20000;
+	htim15.Init.Period = 65535;
 	htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim15.Init.Prescaler = 1999;
 	htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
 	HAL_TIM_Base_Init(&htim15);
-	HAL_TIM_Base_Start(&htim15);
+	HAL_TIM_Base_Start_IT(&htim15);
 }
 
 /* TIM16 init function */

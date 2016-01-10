@@ -4,3 +4,4 @@
 
 void reset_encoder(void);
 float get_speed(void);
+void SpeedTimer_PeriodElapsedCallback();

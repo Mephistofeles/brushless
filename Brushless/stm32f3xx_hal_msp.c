@@ -304,6 +304,8 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 	  /* Peripheral clock enable */
 	  __TIM15_CLK_ENABLE();
 
+	  HAL_NVIC_SetPriority(TIM15_IRQn, 1, 0);
+	  HAL_NVIC_EnableIRQ(TIM15_IRQn);
 	  /* USER CODE BEGIN TIM16_MspInit 1 */
 
 	  /* USER CODE END TIM16_MspInit 1 */

@@ -234,7 +234,14 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	MC_TIMx_SixStep_timebase();
+	if (htim->Instance == TIM6)
+	{
+		MC_TIMx_SixStep_timebase();
+	}
+	else if (htim->Instance == TIM15)
+	{		
+		SpeedTimer_PeriodElapsedCallback();
+	}
 }
 /**
   * @}
