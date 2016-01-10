@@ -1041,13 +1041,7 @@
     <ClInclude Include="l6230.h">
       <Filter>Header files\Drivers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Projects\Multi\Examples\MotorControl\Inc\MC_SixStep_param.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Drivers\BSP\Components\Common\MC_Common.h">
-      <Filter>Header files\Drivers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Users\pawel\Desktop\X-CUBE-SPN7\Brushless\Middlewares\ST\MC_6Step_Lib\Inc\stm32_nucleo_ihm07m1.h">
+    <ClInclude Include="stm32_nucleo_ihm07m1.h">
       <Filter>Header files\Drivers</Filter>
     </ClInclude>
     <ClInclude Include="6Step_Lib.h">
@@ -1325,6 +1319,12 @@
     </ClInclude>
     <ClInclude Include="encoder.h">
       <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="MC_Common.h">
+      <Filter>Header files\Drivers</Filter>
+    </ClInclude>
+    <ClInclude Include="MC_SixStep_param.h">
+      <Filter>Header files\Drivers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
