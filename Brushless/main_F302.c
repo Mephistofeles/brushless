@@ -149,33 +149,33 @@ void SVPWM_run(float a, float m)
 	switch (sector) {
 	case 0:
 		phase_U_enable_duty_cycle = (t1 + t2) * 719;
-		phase_V_enable_duty_cycle = t1 * 719;//719 / 2;
+		phase_V_enable_duty_cycle = t2 * 719;
 		phase_W_enable_duty_cycle = 0;
 		break;
 	case 1:
-		phase_U_enable_duty_cycle = (t1 + t2) * 719;
-		phase_V_enable_duty_cycle = 0;
-		phase_W_enable_duty_cycle = t2 * 719;//719 / 2;
+		phase_U_enable_duty_cycle = t1 * 719;
+		phase_V_enable_duty_cycle = (t1 + t2) * 719;
+		phase_W_enable_duty_cycle = 0;
 		break;
 	case 2:
-		phase_U_enable_duty_cycle = t1 * 719;//719 / 2;
-		phase_V_enable_duty_cycle = 0;
-		phase_W_enable_duty_cycle = (t1 + t2) * 719;
+		phase_U_enable_duty_cycle = 0;
+		phase_V_enable_duty_cycle = (t1 + t2) * 719;
+		phase_W_enable_duty_cycle = t2 * 719;
 		break;
 	case 3:
 		phase_U_enable_duty_cycle = 0;
-		phase_V_enable_duty_cycle = t2 * 719;//719 / 2;
+		phase_V_enable_duty_cycle = t1 * 719;
 		phase_W_enable_duty_cycle = (t1 + t2) * 719;
 		break;
 	case 4:
-		phase_U_enable_duty_cycle = 0;
-		phase_V_enable_duty_cycle = (t1 + t2) * 719;
-		phase_W_enable_duty_cycle = t1 * 719;//719 / 2;
+		phase_U_enable_duty_cycle = t2 * 719;
+		phase_V_enable_duty_cycle = 0;
+		phase_W_enable_duty_cycle = (t1 + t2) * 719;
 		break;
 	case 5:
-		phase_U_enable_duty_cycle = t2 * 719;//719 / 2;
-		phase_V_enable_duty_cycle = (t1 + t2) * 719;
-		phase_W_enable_duty_cycle = 0;
+		phase_U_enable_duty_cycle = (t1 + t2) * 719;
+		phase_V_enable_duty_cycle = 0;
+		phase_W_enable_duty_cycle = t1 * 719;
 		break;
 	default:
 		break;
@@ -353,15 +353,18 @@ int main(void)
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
 	
 
+	float amount = 0.001;
 	while (1)
 	{
 		if (degree >= 360)
 		{
-			degree = 0;
+			degree -= 360;
 		}
 		else
 		{
-			degree +=  0.01f;
+			amount *= 1.00001f;
+			if (amount > 5.0f) amount = 5.0f;
+			degree +=  amount;
 		}
 
 		SVPWM_run(degree, 1);
