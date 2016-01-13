@@ -67,10 +67,10 @@
 #define ADC_Bemf_CH2          ADC_CHANNEL_11   /*BEMF2*/
 #define ADC_Bemf_CH3          ADC_CHANNEL_15   /*BEMF3*/
 
-#define ADC_CH_1_ST           ADC_SAMPLETIME_1CYCLE_5    /*CURRENT sampling time */
-#define ADC_CH_2_ST           ADC_SAMPLETIME_181CYCLES_5 /*SPEED sampling time*/
-#define ADC_CH_3_ST           ADC_SAMPLETIME_181CYCLES_5 /*VBUS sampling time*/
-#define ADC_CH_4_ST           ADC_SAMPLETIME_181CYCLES_5 /*TEMP sampling time*/
+#define ADC_CURRENT_SAMPLING_TIME           ADC_SAMPLETIME_1CYCLE_5    /*CURRENT sampling time */
+#define ADC_POTENTIOMETER_SAMPLING_TIME           ADC_SAMPLETIME_181CYCLES_5 /*SPEED sampling time*/
+#define ADC_VBUS_SAMPLING_TIME           ADC_SAMPLETIME_181CYCLES_5 /*VBUS sampling time*/
+#define ADC_TEMPERATURE_SAMPLING_TIME           ADC_SAMPLETIME_181CYCLES_5 /*TEMP sampling time*/
 #define ADC_Bemf_CH1_ST       ADC_SAMPLETIME_61CYCLES_5  /*BEMF1 sampling time*/
 #define ADC_Bemf_CH2_ST       ADC_SAMPLETIME_61CYCLES_5  /*BEMF2 sampling time*/
 #define ADC_Bemf_CH3_ST       ADC_SAMPLETIME_61CYCLES_5  /*BEMF3 sampling time*/

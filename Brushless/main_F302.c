@@ -233,8 +233,8 @@ int main(void)
 	
 	L6230_Start_PWM_generation();
 	//MC_SixStep_Start_PWM_driving();
-	MC_SixStep_Current_Reference_Start();
-	MC_SixStep_Current_Reference_Setvalue(2000);
+	//MC_SixStep_Current_Reference_Start();
+	//MC_SixStep_Current_Reference_Setvalue(1500);
 
 	
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH1_PHASE_U_ENABLE, GPIO_PIN_SET);
@@ -243,6 +243,7 @@ int main(void)
 	
 	float speed = 0.001f;
 	HAL_Delay(300);
+	HAL_ADC_Start_IT(&ADCx);
 	while (1)
 	{
 		if (degree >= 360)
@@ -260,9 +261,9 @@ int main(void)
 			
 		if (speed > 20.0f) speed = 20.0f;
 		
-		degree += speed;//0.058474768f; 20 rev / 15 sec
+		degree += speed;//0.058474768f; // 20 rev / 15 sec
 
-		SVPWM_run(degree, 1);
+		SVPWM_run(degree, 0.3f);
 	}
 	
 	//SPI_Init();
@@ -349,7 +350,7 @@ void MX_ADC1_Init(void)
 		/**Configure Regular Channel
 		*/
 	ADC_ChannelConfTypeDef sConfig;
-	sConfig.Channel = ADC_CHANNEL_12;
+	sConfig.Channel = ADC_SPEED_POTENTIOMETER;
 	sConfig.Rank = 1;
 	sConfig.SingleDiff = ADC_SINGLE_ENDED;
 	sConfig.SamplingTime = ADC_SAMPLETIME_19CYCLES_5;

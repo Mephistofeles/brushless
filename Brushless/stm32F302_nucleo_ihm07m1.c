@@ -113,18 +113,18 @@ void MC_SixStep_Nucleo_Init()
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_BREAK); /* Enable the TIM Break interrupt */
 
 	/******************** REGULAR CHANNELS CONFIGURATION *************************/
-	sConfig.Channel = ADC_CURRENT_FEEDBACK_2; /* Current feedabck */
+	sConfig.Channel = ADC_CURRENT_FEEDBACK_1 | ADC_CURRENT_FEEDBACK_2 | ADC_CURRENT_FEEDBACK_3; /* Current feedback */
 	sConfig.Rank = 1;
 	sConfig.SingleDiff = ADC_SINGLE_ENDED;
-	sConfig.SamplingTime = ADC_CH_1_ST;
+	sConfig.SamplingTime = ADC_CURRENT_SAMPLING_TIME;
 	sConfig.OffsetNumber = ADC_OFFSET_NONE;
 	sConfig.Offset = 0;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_VBUS; /* Bus voltage */
-	sConfig.SamplingTime = ADC_CH_3_ST;
+	sConfig.SamplingTime = ADC_VBUS_SAMPLING_TIME;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_TEMP; /* Temperature feedback */
-	sConfig.SamplingTime = ADC_CH_4_ST;
+	sConfig.SamplingTime = ADC_TEMPERATURE_SAMPLING_TIME;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_Bemf_CH1; /* BEMF feedback phase A */
 	sConfig.SamplingTime = ADC_Bemf_CH1_ST;
@@ -136,7 +136,7 @@ void MC_SixStep_Nucleo_Init()
 	sConfig.SamplingTime = ADC_Bemf_CH3_ST;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	sConfig.Channel = ADC_SPEED_POTENTIOMETER; /* Potentiometer */
-	sConfig.SamplingTime = ADC_CH_2_ST;
+	sConfig.SamplingTime = ADC_POTENTIOMETER_SAMPLING_TIME;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	/***************************************************************************/
 }
