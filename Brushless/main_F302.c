@@ -233,8 +233,8 @@ int main(void)
 	
 	L6230_Start_PWM_generation();
 	//MC_SixStep_Start_PWM_driving();
-	//MC_SixStep_Current_Reference_Start();
-	//MC_SixStep_Current_Reference_Setvalue(1500);
+	MC_SixStep_Current_Reference_Start();
+	MC_SixStep_Current_Reference_Setvalue(1500);
 
 	
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH1_PHASE_U_ENABLE, GPIO_PIN_SET);
@@ -242,14 +242,23 @@ int main(void)
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
 	
 	float speed = 0.001f;
+	float direction = 1;
 	HAL_Delay(300);
-	HAL_ADC_Start_IT(&ADCx);
+	degree = 0;
+	//HAL_ADC_Start_IT(&ADCx);
 	while (1)
 	{
-		if (degree >= 360)
-		{
-			degree -= 360;	
-		}
+		//if (degree >= 360)
+		//{
+			////degree -= 360;
+			//direction = -1;
+			//HAL_Delay(1500);
+		//}
+		//if (degree <= 0)
+		//{
+			//direction = 1;
+			//HAL_Delay(1500);
+		//}
 		if (speed < 4.0f)
 		{
 			speed *= 1.000005f;
@@ -261,9 +270,10 @@ int main(void)
 			
 		if (speed > 20.0f) speed = 20.0f;
 		
-		degree += speed;//0.058474768f; // 20 rev / 15 sec
-
-		SVPWM_run(degree, 0.3f);
+		degree += 0.0005f * direction;//speed;//0.058474768f; // 20 rev / 15 sec 
+		
+		degree = (float)__HAL_TIM_GetCounter(&htim2) * 360.0f / 4096.0f;
+		SVPWM_run(degree, 0.86602540378f);
 	}
 	
 	//SPI_Init();
@@ -428,8 +438,8 @@ void MX_TIM1_Init(void)
 	TIM_OC_InitTypeDef sConfigOC;
 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	sConfigOC.Pulse = 575;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW;
 	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
 	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
 	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
@@ -530,8 +540,8 @@ void MX_TIM16_Init(void)
 	TIM_OC_InitTypeDef sConfigOC;
 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	sConfigOC.Pulse = 720;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_LOW;
 	sConfigOC.OCFastMode = TIM_OCFAST_ENABLE;
 	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
 	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
