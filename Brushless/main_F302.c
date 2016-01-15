@@ -234,7 +234,7 @@ int main(void)
 	L6230_Start_PWM_generation();
 	//MC_SixStep_Start_PWM_driving();
 	MC_SixStep_Current_Reference_Start();
-	MC_SixStep_Current_Reference_Setvalue(1500);
+	MC_SixStep_Current_Reference_Setvalue(2000);
 
 	
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH1_PHASE_U_ENABLE, GPIO_PIN_SET);
@@ -250,7 +250,6 @@ int main(void)
 	{
 		//if (degree >= 360)
 		//{
-			////degree -= 360;
 			//direction = -1;
 			//HAL_Delay(1500);
 		//}
@@ -259,6 +258,12 @@ int main(void)
 			//direction = 1;
 			//HAL_Delay(1500);
 		//}
+		
+		if (degree >= 360)
+		{
+			degree -= 360;
+		}
+		
 		if (speed < 4.0f)
 		{
 			speed *= 1.000005f;
@@ -270,10 +275,10 @@ int main(void)
 			
 		if (speed > 20.0f) speed = 20.0f;
 		
-		degree += 0.0005f * direction;//speed;//0.058474768f; // 20 rev / 15 sec 
+		degree += speed;//0.058474768f; // 20 rev / 15 sec 0.5f * direction;//
 		
-		degree = (float)__HAL_TIM_GetCounter(&htim2) * 360.0f / 4096.0f;
-		SVPWM_run(degree, 0.86602540378f);
+		//degree = (float)__HAL_TIM_GetCounter(&htim2) * 360.0f / 4096.0f;
+		SVPWM_run(degree, 0.3f);//0.86602540378f);
 	}
 	
 	//SPI_Init();
@@ -410,9 +415,7 @@ void MX_TIM1_Init(void)
 	sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
 	sClearInputConfig.ClearInputFilter = 0;
 	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_1);
-
 	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_2);
-
 	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_3);
 
 	TIM_MasterConfigTypeDef sMasterConfig;

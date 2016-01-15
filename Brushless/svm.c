@@ -3,13 +3,35 @@
 
 void SVPWM_run(float a, float m)
 {
-	//float Ualpha, Ubeta;
 	//float X, Y, Z;
 	//float PWMa, PWMb, PWMc;
 	uint8_t sector;
 
-	//Ualpha = m * cos(a);
-	//Ubeta = m * sin(a);
+	float Ualpha = m * cosf(a * 0.0174532925f);
+	float Ubeta = m * sinf(a * 0.0174532925f);
+	
+	float angle = atan2f(Ubeta, Ualpha);
+	float magnitude = sqrtf(Ualpha * Ualpha + Ubeta * Ubeta);
+	
+	if (angle < 0) angle = 2 * PI + angle;
+	
+	if (angle <= PI / 3) sector = 0;
+	else if (angle <= 2 * PI / 3) sector = 1;
+	else if (angle <= 3 * PI / 3) sector = 2;
+	else if (angle <= 4 * PI / 3) sector = 3;
+	else if (angle <= 5 * PI / 3) sector = 4;
+	else sector = 5;
+	
+	float restricted_angle_0_60 = fmodf(angle, PI / 3);
+	
+	float calculated_Ualpha = magnitude * cosf(restricted_angle_0_60);
+	float calculated_Ubeta = magnitude * sinf(restricted_angle_0_60);
+	
+	float timeA = calculated_Ualpha - calculated_Ubeta / sqrtf(3);
+	float timeB = 2 / sqrtf(3) * calculated_Ubeta;
+	float time07 = 1 - timeA - timeB;
+	
+	asm("nop");
 	
 	//float angle = a;
 	//if (angle >= 180.0f) angle -= 360.0f;
@@ -20,12 +42,12 @@ void SVPWM_run(float a, float m)
 	//Y = Ubeta * 0.5f + Ualpha * 0.8660254f; //(Ubeta + Ualpha*sqrt(3))/2
 	//Z = X - Y;				//(Ubeta - Ualpha*sqrt(3))/2
 
-	if (a <= 60) sector = 0;
-	else if (a <= 120) sector = 1;
-	else if (a <= 180) sector = 2;
-	else if (a <= 240) sector = 3;
-	else if (a <= 300) sector = 4;
-	else sector = 5;
+	//if (a <= 60) sector = 0;
+	//else if (a <= 120) sector = 1;
+	//else if (a <= 180) sector = 2;
+	//else if (a <= 240) sector = 3;
+	//else if (a <= 300) sector = 4;
+	//else sector = 5;
 
 	//switch (sector) {
 	//case 0:
@@ -59,17 +81,22 @@ void SVPWM_run(float a, float m)
 	//float t2 = 0.8660254f * m * restricted_sin;
 	//float t0 = 1 - t1 - t2;
 	
-	float rad = 0.0174532925f * fmodf(a, 60);
-	
-	float ta = 1.15470053838f * m * cosf(rad + PI / 6);
-	float tb = 1.15470053838f * m * sinf(rad);
-	float t07 = 1 - ta - tb;
-	
-	float t02 = t07 / 4;
-	
+	//float rad = 0.0174532925f * fmodf(a, 60);
+	//
+	//float ta = 1.15470053838f * m * cosf(rad + PI / 6);
+	//float tb = 1.15470053838f * m * sinf(rad);
+	//float t07 = 1 - ta - tb;
+	//
+	//float t02 = t07 / 4;
+	//
 	float dutyU, dutyV, dutyW;
 	
-	switch (sector) {
+	float ta = timeA;
+	float tb = timeB;
+	float t02 = time07 / 4.0f;
+	
+	switch (sector)
+	{
 	case 0: // 100 -> 110
 		dutyU = t02;
 		dutyV = t02 + ta;
@@ -102,8 +129,8 @@ void SVPWM_run(float a, float m)
 		break;
 	default:
 		break;
-	}	
-		
+	}
+	
 	uint16_t phase_U_enable_duty_cycle = 718 * dutyU;
 	uint16_t phase_V_enable_duty_cycle = 718 * dutyV;
 	uint16_t phase_W_enable_duty_cycle = 718 * dutyW;	
