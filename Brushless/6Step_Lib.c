@@ -1372,7 +1372,7 @@ void MC_ADCx_SixStep_Bemf()
 		
 		float current = (adc - 1935.0f) / (3687.0f - 1935.0f) * 2.8f;
 		
-		if (current > 0 && current < min_adc) min_adc = current;
+		if (current < min_adc) min_adc = current;
 		if (current > max_adc) max_adc = current;
 		
 		if (++channel >= 3) channel = 0;
@@ -1390,7 +1390,7 @@ void MC_ADCx_SixStep_Bemf()
 			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_2);
 			break;
 		case 2:
-			curV = current + 0.05f;
+			curV = current;
 			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_3);
 			break;	
 		}
