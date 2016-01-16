@@ -4,4 +4,5 @@
 
 void reset_encoder(void);
 float get_speed(void);
+float get_magnetic_theta_deg(void);
 void SpeedTimer_PeriodElapsedCallback();

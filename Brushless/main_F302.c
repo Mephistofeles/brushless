@@ -45,6 +45,7 @@
 #include "l6230.h"
 #include "stm32f3xx_nucleo.h"
 #include "encoder.h"
+#include "field_oriented_control.h"
 #include "svm.h"
 /* USER CODE END Includes */
 
@@ -241,11 +242,13 @@ int main(void)
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH2_PHASE_V_ENABLE, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIO_PORT_PHASE_ENABLE, GPIO_CH3_PHASE_W_ENABLE, GPIO_PIN_SET);
 	
-	float speed = 0.001f;
+	init_algorithm();
+	
+	float speed = 0.1f;
 	float direction = 1;
 	HAL_Delay(300);
 	degree = 0;
-	//HAL_ADC_Start_IT(&ADCx);
+	HAL_ADC_Start_IT(&ADCx);
 	while (1)
 	{
 		//if (degree >= 360)
@@ -266,14 +269,14 @@ int main(void)
 		
 		if (speed < 4.0f)
 		{
-			speed *= 1.000005f;
+			speed *= 1.0005f;
 		}
 		else
 		{
-			speed *= 1.000005f;        
+			speed *= 1.00005f;        
 		}
 			
-		if (speed > 20.0f) speed = 20.0f;
+		if (speed > 0.020f) speed = 0.020f;
 		
 		degree += speed;//0.058474768f; // 20 rev / 15 sec 0.5f * direction;//
 		

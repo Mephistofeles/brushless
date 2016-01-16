@@ -16,14 +16,17 @@ void reset_encoder()
 		speed = (45000.0f / time) * 60.0f;
 	}
 		
-	//El_Speed_Hz = (int32_t)((SIXSTEP_parameters.SYSCLK_frequency) / (prsc)) / (__HAL_TIM_GetAutoreload(&LF_TIMx) * 6);
-		
 	stopped = FALSE;
 }
 
 float get_speed()
 {
 	return speed;
+}
+
+float get_magnetic_theta_deg()
+{
+	return fmodf(__HAL_TIM_GetCounter(&htim15) / 4095.0f * 360.0f, 51.42f);
 }
 
 void SpeedTimer_PeriodElapsedCallback()

@@ -60,6 +60,8 @@ The main function are the following:
 #include <string.h>
 #include <core_cm4.h>
 #include "stm32f3xx_hal_conf.h"
+#include "field_oriented_control.h"
+#include "encoder.h"
 
 /** @addtogroup MIDDLEWARES     MIDDLEWARES
   * @brief  Middlewares Layer
@@ -1354,8 +1356,11 @@ void MC_SixStep_ARR_Bemf(uint8_t up_bemf)
 	* @retval None
 */
 
-uint32_t min_adc = 4000;
-uint32_t max_adc = 0;
+float min_adc = 1;
+float max_adc = 0;
+uint8_t channel = 0;
+
+float curU, curV, curW;
 
 void MC_ADCx_SixStep_Bemf()
 {
@@ -1365,15 +1370,32 @@ void MC_ADCx_SixStep_Bemf()
 		
 		uint32_t adc = HAL_ADC_GetValue(&ADCx);
 		
-		if (adc > 0 && adc < min_adc) min_adc = adc;
-		if (adc > max_adc) max_adc = adc;
+		float current = (adc - 1935.0f) / (3687.0f - 1935.0f) * 2.8f;
 		
-		if (adc > 2000)
+		if (current > 0 && current < min_adc) min_adc = current;
+		if (current > max_adc) max_adc = current;
+		
+		if (++channel >= 3) channel = 0;
+		
+		switch (channel)
 		{
-			asm("nop");
+		case 0:
+			curW = current;
+			float Ualpha, Ubeta;
+			algorithm(curU, curV, get_magnetic_theta_deg(), get_speed(), &Ualpha, &Ubeta);
+			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_1);
+			break;
+		case 1:
+			curU = current;
+			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_2);
+			break;
+		case 2:
+			curV = current + 0.05f;
+			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_3);
+			break;	
 		}
 		
-		MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_2);
+		
 		   /* UP-counting direction started */
 		   /* GET the ADC value (PHASE CURRENT)*/
 		//if (SIXSTEP_parameters.STATUS != START && SIXSTEP_parameters.STATUS != ALIGNMENT)

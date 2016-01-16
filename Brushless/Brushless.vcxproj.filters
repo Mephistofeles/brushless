@@ -1332,6 +1332,9 @@
     <ClInclude Include="svm.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="field_oriented_control.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
