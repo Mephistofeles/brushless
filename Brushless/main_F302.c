@@ -269,19 +269,24 @@ int main(void)
 		
 		if (speed < 4.0f)
 		{
-			speed *= 1.0005f;
+			speed * = 1.00005f;
 		}
 		else
 		{
-			speed *= 1.00005f;        
+			speed * = 1.00005f;        
 		}
 			
-		if (speed > 0.020f) speed = 0.020f;
+		if (speed > 8.0f) speed = 8.0f;
 		
-		degree += speed;//0.058474768f; // 20 rev / 15 sec 0.5f * direction;//
+		float potentiometer = MC_SixStep_Speed_Potentiometer();
+		
+		float cur = potentiometer / 4096.0f * 0.5f;
+		float deg = potentiometer / 4096.0f * 30.0f;
+		
+		degree += deg;//0.058474768f; // 20 rev / 15 sec 0.5f * direction;//
 		
 		//degree = (float)__HAL_TIM_GetCounter(&htim2) * 360.0f / 4096.0f;
-		SVPWM_run(degree, 0.3f);//0.86602540378f);
+		SVPWM_run(degree, 0.6f);//0.86602540378f);
 	}
 	
 	//SPI_Init();
