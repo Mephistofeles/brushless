@@ -26,7 +26,7 @@ float get_speed()
 
 float get_magnetic_theta_deg()
 {
-	return fmodf(__HAL_TIM_GetCounter(&htim15) / 4095.0f * 360.0f, 51.42f);
+	return fmodf(__HAL_TIM_GetCounter(&htim2) / 4095.0f * 360.0f, 51.42f);
 }
 
 void SpeedTimer_PeriodElapsedCallback()
