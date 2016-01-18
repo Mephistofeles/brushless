@@ -98,14 +98,14 @@ void MC_SixStep_Nucleo_Init()
 	ADC_ChannelConfTypeDef sConfig;
 
 	/******************** ETR CONFIGURATION ************************************/
-	sClearInputConfig.ClearInputState = 1;
-	sClearInputConfig.ClearInputSource = TIM_CLEARINPUTSOURCE_ETR;
-	sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
-	sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
-	sClearInputConfig.ClearInputFilter = 0;
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH1_PHASE_U);
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH2_PHASE_V);
-	HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH3_PHASE_W);
+	//sClearInputConfig.ClearInputState = 1;
+	//sClearInputConfig.ClearInputSource = TIM_CLEARINPUTSOURCE_ETR;
+	//sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
+	//sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
+	//sClearInputConfig.ClearInputFilter = 0;
+	//HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH1_PHASE_U);
+	//HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH2_PHASE_V);
+	//HAL_TIM_ConfigOCrefClear(&HF_TIMx, &sClearInputConfig, HF_TIMx_CH3_PHASE_W);
 	/***************************************************************************/
 
 	__HAL_FREEZE_TIM1_DBGMCU();  /* Stop TIM during Breakpoint*/

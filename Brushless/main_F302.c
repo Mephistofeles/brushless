@@ -412,14 +412,14 @@ void MX_TIM1_Init(void)
 
 	HAL_TIM_PWM_Init(&htim1);
 
-	TIM_ClearInputConfigTypeDef sClearInputConfig;
-	sClearInputConfig.ClearInputSource = TIM_CLEARINPUTSOURCE_ETR;
-	sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
-	sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
-	sClearInputConfig.ClearInputFilter = 0;
-	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_1);
-	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_2);
-	HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_3);
+	//TIM_ClearInputConfigTypeDef sClearInputConfig;
+	//sClearInputConfig.ClearInputSource = TIM_CLEARINPUTSOURCE_ETR;
+	//sClearInputConfig.ClearInputPolarity = TIM_CLEARINPUTPOLARITY_NONINVERTED;
+	//sClearInputConfig.ClearInputPrescaler = TIM_CLEARINPUTPRESCALER_DIV1;
+	//sClearInputConfig.ClearInputFilter = 0;
+	//HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_1);
+	//HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_2);
+	//HAL_TIM_ConfigOCrefClear(&htim1, &sClearInputConfig, TIM_CHANNEL_3);
 
 	TIM_MasterConfigTypeDef sMasterConfig;
 	sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
