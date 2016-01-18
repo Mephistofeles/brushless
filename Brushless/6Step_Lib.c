@@ -124,7 +124,7 @@ void MC_SixStep_NEXT_step(void);
 void MC_Speed_Filter(void);
 void MC_SixStep_ARR_step(void);
 void MC_SixStep_TABLE(uint8_t);
-void MC_SixStep_Speed_Potentiometer(void);
+float MC_SixStep_Speed_Potentiometer(void);
 void MC_Set_PI_param(SIXSTEP_PI_PARAM_InitTypeDef_t *);
 void MC_Task_Speed(void);
 void MC_SixStep_Alignment(void);
@@ -700,7 +700,7 @@ void MC_SixStep_Speed_Val_target_potentiometer()
 	* @retval None
 */
 
-void MC_SixStep_Speed_Potentiometer()
+float MC_SixStep_Speed_Potentiometer()
 {
 	uint16_t i = 0;
 	uint32_t sum = 0;
@@ -718,7 +718,7 @@ void MC_SixStep_Speed_Potentiometer()
 	sum -= max;
 	mean = sum / (HFBUFFERSIZE - 1);
 
-	SIXSTEP_parameters.Speed_Ref_filtered = MC_Potentiometer_filter(mean);
+	return MC_Potentiometer_filter(mean);
 }
 
 /**
@@ -1250,7 +1250,7 @@ void MC_SysTick_SixStep_MediumFrequencyTask()
 
 	if (SIXSTEP_parameters.VALIDATION_OK == TRUE && SIXSTEP_parameters.Potentiometer  == TRUE)
 	{
-		MC_SixStep_Speed_Potentiometer();
+		SIXSTEP_parameters.Speed_Ref_filtered = MC_SixStep_Speed_Potentiometer();
 	}
    /* Push button delay time to avoid double command */
 	if (HAL_GetTick() == BUTTON_DELAY && Enable_start_button != TRUE)
@@ -1359,6 +1359,7 @@ void MC_SixStep_ARR_Bemf(uint8_t up_bemf)
 float min_adc = 1;
 float max_adc = 0;
 uint8_t channel = 0;
+uint32_t adc_channel = ADC_CURRENT_FEEDBACK_1;
 
 float curU, curV, curW;
 
@@ -1374,26 +1375,30 @@ void MC_ADCx_SixStep_Bemf()
 		
 		if (current < min_adc) min_adc = current;
 		if (current > max_adc) max_adc = current;
-		
-		if (++channel >= 3) channel = 0;
-		
-		switch (channel)
+				
+		switch (adc_channel)
 		{
-		case 0:
+		case ADC_CURRENT_FEEDBACK_3:
 			curW = current;
 			float Ualpha, Ubeta;
 			algorithm(curU, curV, get_magnetic_theta_deg(), get_speed(), &Ualpha, &Ubeta);
-			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_1);
+			
+			adc_channel = SIXSTEP_parameters.ADC_SEQ_CHANNEL[index_adc_chn];
+			MC_SixStep_ADC_Channel(SIXSTEP_parameters.ADC_SEQ_CHANNEL[index_adc_chn]);
 			break;
-		case 1:
+		case ADC_CURRENT_FEEDBACK_1:
 			curU = current;
+			adc_channel = ADC_CURRENT_FEEDBACK_2;
 			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_2);
 			break;
-		case 2:
+		case ADC_CURRENT_FEEDBACK_2:
 			curV = current;
+			adc_channel = ADC_CURRENT_FEEDBACK_3;
 			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_3);
 			break;	
 		}
+		
+		
 		
 		
 		   /* UP-counting direction started */
@@ -1554,25 +1559,31 @@ void MC_ADCx_SixStep_Bemf()
 		///******************************************************************************/
 		HAL_GPIO_WritePin(GPIO_PORT_COMM, GPIO_CH_COMM, GPIO_PIN_RESET);
 	}
-	//else
-	//{
-	  ///* Down-counting direction started */
-	  ///* Set the channel for next ADC Regular reading */
-//
-		//SIXSTEP_parameters.ADC_Regular_Buffer[index_adc_chn] = HAL_ADC_GetValue(&ADCx);
-//
-		//if (index_adc_chn == 1)
-		//{
-			//HFBuffer[HFBufferIndex++] = HAL_ADC_GetValue(&ADCx);
-			//if (HFBufferIndex >= HFBUFFERSIZE)
-			//{
-				//HFBufferIndex = 0;
-			//}
-		//}
-		//index_adc_chn++;
-		//if (index_adc_chn > 3) index_adc_chn = 0;
-		//MC_SixStep_ADC_Channel(SIXSTEP_parameters.CurrentRegular_BEMF_ch);
-	//}
+	else
+	{
+	  /* Down-counting direction started */
+	  /* Set the channel for next ADC Regular reading */
+
+		if (adc_channel == SIXSTEP_parameters.ADC_SEQ_CHANNEL[index_adc_chn])
+		{
+			
+			SIXSTEP_parameters.ADC_Regular_Buffer[index_adc_chn] = HAL_ADC_GetValue(&ADCx);
+		
+			if (index_adc_chn == 1 && adc_channel == ADC_SPEED_POTENTIOMETER)
+			{
+				HFBuffer[HFBufferIndex++] = HAL_ADC_GetValue(&ADCx);
+				if (HFBufferIndex >= HFBUFFERSIZE)
+				{
+					HFBufferIndex = 0;
+				}
+			}
+			index_adc_chn++;
+			if (index_adc_chn > 3) index_adc_chn = 0;
+			//MC_SixStep_ADC_Channel(SIXSTEP_parameters.CurrentRegular_BEMF_ch);
+			adc_channel = ADC_CURRENT_FEEDBACK_1;
+			MC_SixStep_ADC_Channel(ADC_CURRENT_FEEDBACK_1);
+		 }
+	}
 }
 
 /**

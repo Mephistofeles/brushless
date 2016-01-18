@@ -192,6 +192,8 @@ void MC_StopMotor(void);
 void MC_Set_Speed(uint16_t);
 void MC_EXT_button_SixStep(void);
 
+float MC_SixStep_Speed_Potentiometer();
+
 /**
   * @}
   */
