@@ -44,5 +44,5 @@ void algorithm(float phase_a_current, float phase_b_current, float theta, float 
 	float calculated_torque_voltage = arm_pid_f32(&torque_iq_pi, reference_torque_current - torque_current_iq);
 	float calculated_flux_voltage = arm_pid_f32(&flux_id_pi, reference_flux_current - flux_current_id);
 	
-	arm_inv_park_f32(calculated_flux_voltage, calculated_torque_voltage, &Ualpha, &Ubeta, theta_sin, theta_cos);
+	arm_inv_park_f32(calculated_flux_voltage, calculated_torque_voltage, Ualpha, Ubeta, theta_sin, theta_cos);
 }
